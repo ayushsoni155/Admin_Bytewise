@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Stylish&display=swap');
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Stylish", serif;
+  
+  }
+body{
+  /* background-image: radial-gradient( rgb(34, 34, 34) 1px,transparent 0);
+  background-size: 40px 40px;  */
+  background-color: white;
+}
