@@ -63,10 +63,10 @@ const fetchDashboardData = async (date) => {
       />
 
       <div className="stats-grid">
-        <Link to='/User'><div className="stat-card">
+        <div className="stat-card">
           <h3>Total Users</h3>
           <p>{stats.totalUsers}</p>
-        </div></Link>
+        </div>
         <div className="stat-card">
           <h3>Today's Sale</h3>
           <p>₹{stats.todaysSale}</p>
