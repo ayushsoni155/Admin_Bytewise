@@ -1,0 +1,45 @@
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    font-family: "stylish",serif;
+    color: #fff;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 200px;
+}
+
+.notification p {
+    margin: 0;
+    padding-right: 10px;
+}
+
+.notification button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.notification.info {
+    background-color: #2196F3; /* Blue for info */
+}
+
+.notification.success {
+    background-color: #2dbf31; /* Green for success */
+}
+
+.notification.error {
+    background-color: #ff1100; /* Red for error */
+}
+
+.notification.warning {
+    background-color: #ffbf00; /* Yellow for warning */
+}
