@@ -49,7 +49,7 @@ const AdminFeedback = () => {
                         {feedbacks.map((feedback, index) => (
                             <tr key={index}>
                                 <td>{feedback.feedback_enrolmentID}</td>
-                                <td>{feedback.user_name}</td>
+                                <td>{feedback.name}</td>
                                 <td>{feedback.feedback_text}</td>
                                 <td>{new Date(feedback.feedback_date).toLocaleDateString()}</td>
                             </tr>
