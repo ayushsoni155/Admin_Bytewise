@@ -14,7 +14,7 @@ const AdminOrder = () => {
     // Fetch orders from backend
     const fetchOrders = async () => {
       try {
-        const response = await fetch("http://localhost:3000/orders"); // Replace with your API endpoint
+        const response = await fetch("http://bytewise-server.vercel.app/api/orderData"); // Replace with your API endpoint
         if (!response.ok) {
           throw new Error("Failed to fetch orders");
         }
@@ -49,7 +49,7 @@ const AdminOrder = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/orders/${searchOrderID}`, {
+      const response = await fetch(`http://bytewise-server.vercel.app/api/orders/${searchOrderID}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
