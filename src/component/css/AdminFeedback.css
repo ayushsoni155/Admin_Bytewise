@@ -3,40 +3,92 @@
     max-width: 1200px;
     margin: auto;
     margin-top: 100px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.admin-feedback-container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
+    color: #444;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .feedback-table {
     width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.feedback-table th, .feedback-table td {
-    padding: 10px 15px;
-    border: 1px solid #ddd;
+.feedback-table th, 
+.feedback-table td {
+    padding: 12px 15px;
     text-align: left;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
 .feedback-table th {
-    background-color: #f4f4f4;
-    color: #555;
+    background-color: #4CAF50;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .feedback-table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
+.feedback-table tr:hover td {
+    background-color: #e8f5e9;
+}
+
+.feedback-table td {
+    color: #333;
+    border-bottom: 1px solid #ddd;
+}
+
+.feedback-table tr:last-child td {
+    border-bottom: none;
+}
+
 .error-message {
     color: red;
     text-align: center;
     margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .admin-feedback-container {
+        padding: 15px;
+        margin-top: 50px;
+    }
+
+    .feedback-table th, 
+    .feedback-table td {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
 }
