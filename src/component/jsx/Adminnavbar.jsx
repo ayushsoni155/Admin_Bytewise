@@ -42,7 +42,7 @@ const Adminnavbar= () => {
             <li><Link to="/" onClick={handleLinkClick}>Dashboard</Link></li>
             <li><Link to="/" onClick={handleLinkClick}>Orders</Link></li>
             <li><Link to="/User" onClick={handleLinkClick}>Users</Link></li>
-            <li><Link to="/" onClick={handleLinkClick}>Feedback</Link></li>
+            <li><Link to="/Feedback" onClick={handleLinkClick}>Feedback</Link></li>
           </ul>
           
           {/* Conditional rendering for Login/Profile button */}
