@@ -10,7 +10,7 @@ const AdminFeedback = () => {
     useEffect(() => {
         const fetchFeedbacks = async () => {
             try {
-                const response = await fetch('https://bytewise-server.vercel.app/api/feedback'); // Replace with your API endpoint
+                const response = await fetch('https://server-admin-bytewise.vercel.app/api/feedback'); // Replace with your API endpoint
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
