@@ -31,8 +31,7 @@ const Adminnavbar= () => {
     <header>
       <div className="container">
         <div className="logo">
-         <Link to='/' onClick={handleLinkClick}>
-          <img src="logo-transparent-png.png" alt="ByteWise Logo" className="logo-img" /><Link/>
+        <Link to='/' onClick={handleLinkClick}><img src="logo-transparent-png.png" alt="ByteWise Logo" className="logo-img" /></Link>
           <p id="tagline">Your toolkit for engineering success</p>
         </div>
         
