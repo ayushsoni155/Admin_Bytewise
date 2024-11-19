@@ -85,7 +85,7 @@ const fetchDashboardData = async (date) => {
         </div>
       </div>
 
-      <h2>Item Details</h2>
+      <h2>Manuals to Print</h2>
       <table className="item-table">
         <thead>
           <tr>
