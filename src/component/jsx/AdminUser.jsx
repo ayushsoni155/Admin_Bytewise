@@ -12,8 +12,6 @@ const AdminUser = () => {
       if (response.ok) {
         const data = await response.json();
         setUsers(data);
-        console.log(data);
-        console.log(users);
       } else {
         console.error('Failed to fetch user details');
       }
