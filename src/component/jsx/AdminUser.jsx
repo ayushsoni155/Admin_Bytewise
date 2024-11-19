@@ -8,7 +8,7 @@ const AdminUser = () => {
   // Function to fetch user details
   const fetchUserDetails = async () => {
     try {
-      const response = await fetch('http://localhost:3000/users'); // Replace with your API endpoint
+      const response = await fetch('http://localhost:3000/user'); // Replace with your API endpoint
       if (response.ok) {
         const data = await response.json();
         setUsers(data);
@@ -44,11 +44,11 @@ const AdminUser = () => {
           </thead>
           <tbody>
             {users.map((user) => (
-              <tr key={user.enrolmentID}>
+              <tr key={user.enrolmentID}> {/* Use a unique key */}
                 <td>{user.enrolmentID}</td>
                 <td>{user.name}</td>
                 <td>{user.phone}</td>
-                <td>{user.semester}</td>
+                <td>{user.sem}</td>
               </tr>
             ))}
           </tbody>
