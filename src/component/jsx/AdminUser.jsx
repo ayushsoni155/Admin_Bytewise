@@ -11,7 +11,7 @@ const AdminUser = () => {
       const response = await fetch('https://bytewise-server.vercel.app/api/user'); // Replace with your API endpoint
       if (response.ok) {
         const data = await response.json();
-        setUsers(data);
+        setUsers(data[0]);
       } else {
         console.error('Failed to fetch user details');
       }
