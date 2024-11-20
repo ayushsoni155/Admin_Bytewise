@@ -144,7 +144,7 @@ const AdminOrder = () => {
                 <td>{order.name}</td>
                 <td>{order.enrolmentID}</td>
                 <td>{order.phone}</td>
-                <td>{order.sem}</td>
+                <td>{order.semester}</td>
                 <td>
                   <ul className="order-items-list">
                     {order.items.map((item, index) => (
