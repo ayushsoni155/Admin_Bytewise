@@ -9,6 +9,9 @@ const AdminOrder = () => {
   const [newStatus, setNewStatus] = useState("Pending");
   const [filteredOrder, setFilteredOrder] = useState(null);
   const [notification, setNotification] = useState(null); // State for notification
+  const[changeData,setChangedata]=useState([orderID:"",
+    completeStatus:''
+  ]);
 
   // Fetch all orders
   useEffect(() => {
@@ -56,7 +59,10 @@ const AdminOrder = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ completeStatus: newStatus }),
+        setChangedata([orderID:filteredOrder,
+                      completeStatus:newStatus]);
+                      
+        body: JSON.stringify({ changeData }),
       });
 
       if (!response.ok) {
