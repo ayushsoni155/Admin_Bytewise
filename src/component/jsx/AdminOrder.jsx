@@ -9,9 +9,6 @@ const AdminOrder = () => {
   const [newStatus, setNewStatus] = useState("Pending");
   const [filteredOrder, setFilteredOrder] = useState(null);
   const [notification, setNotification] = useState(null); // State for notification
-  const[changeData,setChangedata]=useState([orderID:"",
-    completeStatus:''
-  ]);
 
   // Fetch all orders
   useEffect(() => {
@@ -21,7 +18,7 @@ const AdminOrder = () => {
         if (!response.ok) {
           throw new Error("Failed to fetch orders");
         }
-        const data = await response.json(); // Parse JSON response
+        const data = await response.json();
         setOrders(data);
       } catch (error) {
         console.error("Error fetching orders:", error);
@@ -35,7 +32,7 @@ const AdminOrder = () => {
   }, []);
 
   // Handle Search
- const handleSearch = () => {
+  const handleSearch = () => {
     const order = orders.find((order) => order.orderID === searchOrderID);
     if (order) {
       setFilteredOrder(order);
@@ -45,7 +42,6 @@ const AdminOrder = () => {
     }
   };
 
-
   // Handle Update Status
   const handleUpdateStatus = async () => {
     if (!filteredOrder) {
@@ -54,15 +50,12 @@ const AdminOrder = () => {
     }
 
     try {
-      const response = await fetch(`https://server-admin-bytewise.vercel.app/api/orders`, {
+      const response = await fetch(`https://server-admin-bytewise.vercel.app/api/orders?orderID=${filteredOrder.orderID}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        setChangedata([orderID:filteredOrder,
-                      completeStatus:newStatus]);
-                      
-        body: JSON.stringify({ changeData }),
+        body: JSON.stringify({ completeStatus: newStatus }),
       });
 
       if (!response.ok) {
