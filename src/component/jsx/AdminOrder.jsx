@@ -10,8 +10,8 @@ const AdminOrder = () => {
   const [filteredOrder, setFilteredOrder] = useState(null);
   const [notification, setNotification] = useState(null); // State for notification
 
+  // Fetch all orders
   useEffect(() => {
-    // Fetch orders from backend
     const fetchOrders = async () => {
       try {
         const response = await fetch("https://server-admin-bytewise.vercel.app/api/ordersData"); // Replace with your API endpoint
@@ -22,6 +22,7 @@ const AdminOrder = () => {
         setOrders(data);
       } catch (error) {
         console.error("Error fetching orders:", error);
+        setNotification({ message: "Failed to fetch orders.", type: "error" });
       } finally {
         setLoading(false);
       }
@@ -32,7 +33,7 @@ const AdminOrder = () => {
 
   // Handle Search
   const handleSearch = () => {
-    const order = orders.find((order) => order.orderID === searchOrderID);
+    const order = orders.find((order) => order.orderID === parseInt(searchOrderID, 10)); // Ensure ID is parsed as a number
     if (order) {
       setFilteredOrder(order);
     } else {
@@ -49,7 +50,7 @@ const AdminOrder = () => {
     }
 
     try {
-      const response = await fetch(`https://server-admin-bytewise.vercel.app/api/orders/${searchOrderID}`, {
+      const response = await fetch(`https://server-admin-bytewise.vercel.app/api/orders/${filteredOrder.orderID}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -65,7 +66,7 @@ const AdminOrder = () => {
       // Update the state to reflect the change
       setOrders((prevOrders) =>
         prevOrders.map((order) =>
-          order.orderID === searchOrderID ? { ...order, completeStatus: newStatus } : order
+          order.orderID === filteredOrder.orderID ? { ...order, completeStatus: newStatus } : order
         )
       );
       setFilteredOrder(null); // Reset filtered order
@@ -142,7 +143,7 @@ const AdminOrder = () => {
                 <td>{order.name}</td>
                 <td>{order.enrolmentID}</td>
                 <td>{order.phone}</td>
-                <td>{order.semester}</td>
+                <td>{order.sem}</td>
                 <td>
                   <ul className="order-items-list">
                     {order.items.map((item, index) => (
