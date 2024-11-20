@@ -17,7 +17,7 @@ const App = () => {
         <Route path="/" element={<Admindashboard/>} />
         <Route path="/User" element={<AdminUser/>} />
         <Route path="/Feedback" element={<AdminFeedback/>} />
-        <Route path="/Order" element={<AdminOrder/>} />
+       
      </Routes>
     </Router>
   );
