@@ -19,7 +19,10 @@ const AdminOrder = () => {
           throw new Error("Failed to fetch orders");
         }
         const data = await response.json();
-        setOrders(data);
+
+        // Sort orders by date in descending order (latest first)
+        const sortedOrders = data.sort((a, b) => new Date(b.order_date) - new Date(a.order_date));
+        setOrders(sortedOrders);
       } catch (error) {
         console.error("Error fetching orders:", error);
         setNotification({ message: "Failed to fetch orders.", type: "error" });
@@ -75,6 +78,18 @@ const AdminOrder = () => {
       console.error("Error updating order status:", error);
       setNotification({ message: "Failed to update order status.", type: "error" });
     }
+  };
+
+  const formatDate = (date) => {
+    const options = {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    };
+    return new Date(date).toLocaleString("en-GB", options);
   };
 
   if (loading) return <p className="loading-text">Loading orders...</p>;
@@ -138,7 +153,7 @@ const AdminOrder = () => {
             {(filteredOrder ? [filteredOrder] : orders).map((order) => (
               <tr key={order.orderID}>
                 <td>{order.orderID}</td>
-                <td>{new Date(order.order_date).toLocaleString()}</td>
+                <td>{formatDate(order.order_date)}</td>
                 <td>{order.completeStatus}</td>
                 <td>{order.name}</td>
                 <td>{order.enrolmentID}</td>
