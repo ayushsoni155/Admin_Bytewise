@@ -7,7 +7,7 @@ import Adminnavbar from './component/jsx/Adminnavbar';
 import Admindashboard from './component/jsx/Admindashboard';
 import AdminUser from './component/jsx/AdminUser';
 import AdminFeedback from './component/jsx/AdminFeedback';
-import AdminOrder from './component/jsx/AdminOrder';
+
 
 const App = () => {
   return (
