@@ -32,8 +32,8 @@ const AdminOrder = () => {
   }, []);
 
   // Handle Search
-  const handleSearch = () => {
-    const order = orders.find((order) => order.orderID === parseInt(searchOrderID, 10)); // Ensure ID is parsed as a number
+ const handleSearch = () => {
+    const order = orders.find((order) => order.orderID === searchOrderID);
     if (order) {
       setFilteredOrder(order);
     } else {
@@ -41,6 +41,7 @@ const AdminOrder = () => {
       setNotification({ message: "Order not found!", type: "error" });
     }
   };
+
 
   // Handle Update Status
   const handleUpdateStatus = async () => {
