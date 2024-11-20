@@ -75,12 +75,15 @@
     color: #495057;
     margin-top: 20px;
 }
+
+/* Actions Section */
 .admin-order-actions {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 .search-box {
@@ -117,8 +120,23 @@
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
+    #admin-order-body {
+        margin-top: 50px;
+        padding: 10px;
+    }
+
     .admin-order-heading {
         font-size: 1.8rem;
+    }
+
+    .admin-order-actions {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .search-box,
+    .status-dropdown {
+        width: 100%;
     }
 
     .admin-order-table {
@@ -128,5 +146,21 @@
     .admin-order-table th,
     .admin-order-table td {
         padding: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .admin-order-heading {
+        font-size: 1.5rem;
+    }
+
+    .admin-order-table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .admin-order-table th,
+    .admin-order-table td {
+        font-size: 0.8rem;
     }
 }
