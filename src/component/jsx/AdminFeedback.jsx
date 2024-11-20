@@ -15,7 +15,11 @@ const AdminFeedback = () => {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                setFeedbacks(data);
+
+                // Sort feedbacks by date in descending order (latest first)
+                const sortedFeedbacks = data.sort((a, b) => new Date(b.feedback_date) - new Date(a.feedback_date));
+
+                setFeedbacks(sortedFeedbacks);
                 setLoading(false);
             } catch (err) {
                 setError('Failed to load feedback. Please try again later.');
@@ -51,7 +55,13 @@ const AdminFeedback = () => {
                                 <td>{feedback.feedback_enrolmentID}</td>
                                 <td>{feedback.name}</td>
                                 <td>{feedback.feedback_text}</td>
-                                <td>{new Date(feedback.feedback_date).toLocaleDateString()}</td>
+                                <td>
+                                    {new Date(feedback.feedback_date).toLocaleDateString('en-GB', {
+                                        day: '2-digit',
+                                        month: '2-digit',
+                                        year: 'numeric',
+                                    })}
+                                </td>
                             </tr>
                         ))}
                     </tbody>
