@@ -1,3 +1,4 @@
+
 // import React, { useState, useEffect } from 'react';
 // import '../css/Notification.css'; // Import the CSS file
 
@@ -39,7 +40,7 @@ const Notification = ({ message, type = 'info', onClose }) => {
         const timer = setTimeout(() => {
             setIsVisible(false);
             if (onClose) onClose();
-        }, 5000);
+        }, 3000);
 
         return () => clearTimeout(timer);
     }, [onClose]);
