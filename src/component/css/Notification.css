@@ -1,23 +1,30 @@
-
 .notification {
     position: fixed;
     top: 20px;
     right: 20px;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    font-family: "stylish",serif;
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins', sans-serif;
     color: #fff;
     z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-width: 200px;
+    min-width: 250px;
+    max-width: 400px;
+    animation: slideIn 0.3s ease-in-out, fadeOut 0.3s ease-in-out 2.7s;
+    overflow: hidden;
+    transition: transform 0.3s, opacity 0.3s;
 }
 
 .notification p {
     margin: 0;
-    padding-right: 10px;
+    padding-right: 15px;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    flex: 1;
+    color: white;
 }
 
 .notification button {
@@ -26,21 +33,69 @@
     color: #fff;
     cursor: pointer;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.notification button:hover {
+    transform: scale(1.2);
 }
 
 .notification.info {
     background-color: #2196F3; /* Blue for info */
+    border-left: 5px solid #1976D2;
 }
 
 .notification.success {
-    background-color: #2dbf31; /* Green for success */
+    background-color: #4CAF50; /* Green for success */
+    border-left: 5px solid #388E3C;
 }
 
 .notification.error {
-    background-color: #ff1100; /* Red for error */
+    background-color: #F44336; /* Red for error */
+    border-left: 5px solid #D32F2F;
 }
 
 .notification.warning {
-    background-color: #ffbf00; /* Yellow for warning */
+    background-color: #FFC107; /* Yellow for warning */
+    border-left: 5px solid #FFA000;
+}
+
+/* Animations */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .notification {
+        top: 10px;
+        right: 10px;
+        min-width: 200px;
+        padding: 10px 15px;
+    }
+
+    .notification p {
+        font-size: 0.9rem;
+    }
+
+    .notification button {
+        font-size: 14px;
+    }
 }
