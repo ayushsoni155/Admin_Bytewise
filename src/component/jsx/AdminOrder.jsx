@@ -20,6 +20,7 @@ const AdminOrder = () => {
         }
         const data = await response.json(); // Parse JSON response
         setOrders(data);
+        console.log(data);
       } catch (error) {
         console.error("Error fetching orders:", error);
       } finally {
