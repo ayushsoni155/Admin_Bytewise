@@ -14,7 +14,7 @@ const AdminOrder = () => {
     // Fetch orders from backend
     const fetchOrders = async () => {
       try {
-        const response = await fetch("https://server-admin-bytewise.vercel.app/api/orderData"); // Replace with your API endpoint
+        const response = await fetch("https://server-admin-bytewise.vercel.app/api/ordersData"); // Replace with your API endpoint
         if (!response.ok) {
           throw new Error("Failed to fetch orders");
         }
