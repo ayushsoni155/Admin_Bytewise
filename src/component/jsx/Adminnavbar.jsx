@@ -40,7 +40,7 @@ const Adminnavbar= () => {
         <nav className={isMenuOpen ? "nav-active" : ""}>
           <ul className="nav-Links">
             <li><Link to="/" onClick={handleLinkClick}>Dashboard</Link></li>
-            <li><Link to="/Order" onClick={handleLinkClick}>Orders</Link></li>
+            <li><Link to="/" onClick={handleLinkClick}>Orders</Link></li>
             <li><Link to="/User" onClick={handleLinkClick}>Users</Link></li>
             <li><Link to="/Feedback" onClick={handleLinkClick}>Feedback</Link></li>
           </ul>
