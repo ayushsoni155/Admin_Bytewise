@@ -1,6 +1,6 @@
 /* General Layout */
 #admin-order-body {
-    margin-top: 150px;
+    margin-top: 100px;
     padding: 20px;
     font-family: 'Poppins', sans-serif;
     background-color: #f8f9fa;
@@ -121,7 +121,7 @@
 /* Responsive Design */
 @media screen and (max-width: 768px) {
     #admin-order-body {
-        margin-top: 50px;
+        margin-top: 100px;
         padding: 10px;
     }
 
