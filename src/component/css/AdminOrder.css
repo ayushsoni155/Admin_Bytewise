@@ -1,10 +1,15 @@
-.admin-order-body {
-    margin-top: 100px;
+
+/* General Layout */
+#admin-order-body {
+    margin: 80px auto;
     padding: 20px;
     font-family: 'Poppins', sans-serif;
     background-color: #f8f9fa;
     border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
 }
+
 /* Order Status Colors */
 .orderPending {
     color: rgb(255, 149, 0);
