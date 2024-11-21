@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import '../css/AdminDashboard.css'; // Add styles here
-import { Link } from 'react-router-dom';
 
 const Admindashboard = () => {
   const [stats, setStats] = useState({
@@ -16,45 +15,39 @@ const Admindashboard = () => {
   const [selectedDate, setSelectedDate] = useState(''); // State to hold selected date
 
   // Function to fetch dashboard data
-  // Function to fetch dashboard data
-const fetchDashboardData = async (date) => {
-  try {
-    let url = 'https://server-admin-bytewise.vercel.app/api/dashboard-data';
-    if (date) {
-      url = `${url}?date=${date}`; // Append the selected date to the URL
+  const fetchDashboardData = async (date) => {
+    try {
+      let url = 'https://server-admin-bytewise.vercel.app/api/dashboard-data';
+      if (date) {
+        url = `${url}?date=${date}`; // Append the selected date to the URL
+      }
+      const response = await fetch(url);
+      if (response.ok) {
+        const data = await response.json();
+        setStats(data); // Update stats with the fetched data
+        setItems(data.itemDetails); // Populate items table from the response
+      } else {
+        console.error('Failed to fetch dashboard data');
+      }
+    } catch (error) {
+      console.error('Error fetching dashboard data:', error);
     }
-    const response = await fetch(url);
-    if (response.ok) {
-      const data = await response.json();
-      setStats(data);  // Update stats with the fetched data
-      setItems(data.itemDetails);  // Populate items table from the response
-    } else {
-      console.error('Failed to fetch dashboard data');
-    }
-  } catch (error) {
-    console.error('Error fetching dashboard data:', error);
-  }
-};
-
+  };
 
   // Fetch dashboard data when the component mounts or when the selected date changes
   useEffect(() => {
-    if (selectedDate) {
-      fetchDashboardData(selectedDate);
-    } else {
-      fetchDashboardData(); // Fetch data for today's date if no date is selected
-    }
-  }, [selectedDate]); // The hook runs every time selectedDate changes
+    fetchDashboardData(selectedDate);
+  }, [selectedDate]);
 
   // Handle date change
   const handleDateChange = (event) => {
-    setSelectedDate(event.target.value);  // Set the new selected date
+    setSelectedDate(event.target.value); // Set the new selected date
   };
 
   return (
     <div className="dashboard-container">
       <h1>Admin Dashboard</h1>
-      
+
       <label htmlFor="dateSelector">Select Date:</label>
       <input
         type="date"
@@ -80,7 +73,7 @@ const fetchDashboardData = async (date) => {
           <h3>Orders Delivered</h3>
           <p>{stats.deliveredOrders}</p>
         </div>
-         <div className="stat-card">
+        <div className="stat-card">
           <h3>Cancelled Orders</h3>
           <p>{stats.cancelledOrders}</p>
         </div>
