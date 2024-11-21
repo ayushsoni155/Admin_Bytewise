@@ -1,26 +1,35 @@
 /* General Layout */
 #admin-order-body {
-    margin-top: 100px;
+    margin: 80px auto;
     padding: 20px;
     font-family: 'Poppins', sans-serif;
     background-color: #f8f9fa;
     border-radius: 12px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
 }
-.orderPending{
-    color:rgb(255, 149, 0);
+
+/* Order Status Colors */
+.orderPending {
+    color: rgb(255, 149, 0);
+    font-weight: bold;
 }
-.orderCompleted{
+
+.orderCompleted {
     color: green;
+    font-weight: bold;
 }
-.orderCancelled{
+
+.orderCancelled {
     color: red;
+    font-weight: bold;
 }
+
 /* Heading */
 .admin-order-heading {
     text-align: center;
     margin-bottom: 20px;
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: #343a40;
@@ -94,19 +103,14 @@
     flex-wrap: wrap;
 }
 
-.search-box {
-    padding: 10px;
-    border: 1px solid #dee2e6;
-    border-radius: 4px;
-    font-size: 1rem;
-    width: 200px;
-}
-
+.search-box,
 .status-dropdown {
     padding: 10px;
     border: 1px solid #dee2e6;
     border-radius: 4px;
     font-size: 1rem;
+    width: 250px;
+    max-width: 100%;
 }
 
 .search-btn,
@@ -119,6 +123,7 @@
     background-color: #4d97e1;
     cursor: pointer;
     transition: background-color 0.3s;
+    width: auto;
 }
 
 .search-btn:hover,
@@ -129,8 +134,7 @@
 /* Responsive Design */
 @media screen and (max-width: 768px) {
     #admin-order-body {
-        margin-top: 100px;
-        padding: 10px;
+        padding: 15px;
     }
 
     .admin-order-heading {
@@ -147,13 +151,10 @@
         width: 100%;
     }
 
-    .admin-order-table {
-        font-size: 0.9rem;
-    }
-
     .admin-order-table th,
     .admin-order-table td {
         padding: 10px;
+        font-size: 0.9rem;
     }
 }
 
@@ -170,5 +171,11 @@
     .admin-order-table th,
     .admin-order-table td {
         font-size: 0.8rem;
+    }
+
+    .search-btn,
+    .update-btn {
+        width: 100%;
+        text-align: center;
     }
 }
