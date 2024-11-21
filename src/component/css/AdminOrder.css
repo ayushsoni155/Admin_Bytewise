@@ -7,7 +7,15 @@
     border-radius: 12px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
-
+.orderPending{
+    color:rgb(255, 149, 0);
+}
+.orderCompleted{
+    color: green;
+}
+.orderCancelled{
+    color: red;
+}
 /* Heading */
 .admin-order-heading {
     text-align: center;
