@@ -9,6 +9,7 @@ const AdminOrder = () => {
   const [newStatus, setNewStatus] = useState("Pending");
   const [filteredOrder, setFilteredOrder] = useState(null);
   const [notification, setNotification] = useState(null); // State for notification
+  const [statusFilter, setStatusFilter] = useState("All"); // State for filter dropdown
 
   // Fetch all orders
   useEffect(() => {
@@ -92,6 +93,11 @@ const AdminOrder = () => {
     return new Date(date).toLocaleString("en-GB", options);
   };
 
+  const filteredOrders =
+    statusFilter === "All"
+      ? orders
+      : orders.filter((order) => order.completeStatus === statusFilter);
+
   if (loading) return <p className="loading-text">Loading orders...</p>;
 
   return (
@@ -107,7 +113,7 @@ const AdminOrder = () => {
         />
       )}
 
-      {/* Search and Update Section */}
+      {/* Search, Filter, and Update Section */}
       <div className="admin-order-actions">
         <input
           type="text"
@@ -123,7 +129,7 @@ const AdminOrder = () => {
         >
           <option value="Pending">Pending</option>
           <option value="Completed">Completed</option>
-           <option value="Cancelled">Cancelled</option>
+          <option value="Cancelled">Cancelled</option>
         </select>
         <button onClick={handleSearch} className="search-btn">
           Search
@@ -131,10 +137,20 @@ const AdminOrder = () => {
         <button onClick={handleUpdateStatus} className="update-btn">
           Update Status
         </button>
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          className="filter-dropdown"
+        >
+          <option value="All">All</option>
+          <option value="Pending">Pending</option>
+          <option value="Completed">Completed</option>
+          <option value="Cancelled">Cancelled</option>
+        </select>
       </div>
 
       {/* Orders Table */}
-      {orders.length === 0 ? (
+      {filteredOrders.length === 0 ? (
         <p className="no-orders-text">No orders found.</p>
       ) : (
         <table className="admin-order-table">
@@ -151,7 +167,7 @@ const AdminOrder = () => {
             </tr>
           </thead>
           <tbody>
-            {(filteredOrder ? [filteredOrder] : orders).map((order) => (
+            {(filteredOrder ? [filteredOrder] : filteredOrders).map((order) => (
               <tr key={order.orderID}>
                 <td>{order.orderID}</td>
                 <td>{formatDate(order.order_date)}</td>
