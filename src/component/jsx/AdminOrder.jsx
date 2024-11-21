@@ -100,7 +100,7 @@ const AdminOrder = () => {
 
   if (loading) return <p className="loading-text">Loading orders...</p>;
 
-  return (
+ return (
     <div id="admin-order-body">
       <h2 className="admin-order-heading">Admin Orders</h2>
 
@@ -113,7 +113,7 @@ const AdminOrder = () => {
         />
       )}
 
-      {/* Search, Filter, and Update Section */}
+      {/* Search and Update Section */}
       <div className="admin-order-actions">
         <input
           type="text"
@@ -137,7 +137,9 @@ const AdminOrder = () => {
         <button onClick={handleUpdateStatus} className="update-btn">
           Update Status
         </button>
-       {/* Filter Section */}
+      </div>
+
+      {/* Filter Section */}
       <div className="filter-section">
         <label htmlFor="status-filter" className="filter-label">Filter by Status:</label>
         <select
@@ -152,7 +154,6 @@ const AdminOrder = () => {
           <option value="Cancelled">Cancelled</option>
         </select>
       </div>
-
 
       {/* Orders Table */}
       {filteredOrders.length === 0 ? (
@@ -175,12 +176,12 @@ const AdminOrder = () => {
             {(filteredOrder ? [filteredOrder] : filteredOrders).map((order) => (
               <tr key={order.orderID}>
                 <td>{order.orderID}</td>
-                <td>{formatDate(order.order_date)}</td>
+                <td>{new Date(order.order_date).toLocaleString()}</td>
                 <td className={`order${order.completeStatus}`}>{order.completeStatus}</td>
                 <td>{order.name}</td>
                 <td>{order.enrolmentID}</td>
                 <td>{order.phone}</td>
-                <td>{order.semester}</td>
+                <td>{order.sem}</td>
                 <td>
                   <ul className="order-items-list">
                     {order.items.map((item, index) => (
