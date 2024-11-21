@@ -123,6 +123,7 @@ const AdminOrder = () => {
         >
           <option value="Pending">Pending</option>
           <option value="Completed">Completed</option>
+           <option value="Cancelled">Cancelled</option>
         </select>
         <button onClick={handleSearch} className="search-btn">
           Search
@@ -154,7 +155,7 @@ const AdminOrder = () => {
               <tr key={order.orderID}>
                 <td>{order.orderID}</td>
                 <td>{formatDate(order.order_date)}</td>
-                <td>{order.completeStatus}</td>
+                <td className={`order${order.completeStatus}`}>{order.completeStatus}</td>
                 <td>{order.name}</td>
                 <td>{order.enrolmentID}</td>
                 <td>{order.phone}</td>
