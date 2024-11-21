@@ -8,6 +8,7 @@ const Admindashboard = () => {
     todaysSale: 0,
     pendingOrders: 0,
     deliveredOrders: 0,
+    cancelledOrders: 0,
     totalOrders: 0,
   });
 
@@ -78,6 +79,10 @@ const fetchDashboardData = async (date) => {
         <div className="stat-card">
           <h3>Orders Delivered</h3>
           <p>{stats.deliveredOrders}</p>
+        </div>
+         <div className="stat-card">
+          <h3>Cancelled Orders</h3>
+          <p>{stats.cancelledOrders}</p>
         </div>
         <div className="stat-card">
           <h3>Total Orders</h3>
