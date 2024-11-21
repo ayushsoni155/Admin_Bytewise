@@ -137,7 +137,11 @@ const AdminOrder = () => {
         <button onClick={handleUpdateStatus} className="update-btn">
           Update Status
         </button>
+       {/* Filter Section */}
+      <div className="filter-section">
+        <label htmlFor="status-filter" className="filter-label">Filter by Status:</label>
         <select
+          id="status-filter"
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
           className="filter-dropdown"
@@ -148,6 +152,7 @@ const AdminOrder = () => {
           <option value="Cancelled">Cancelled</option>
         </select>
       </div>
+
 
       {/* Orders Table */}
       {filteredOrders.length === 0 ? (
