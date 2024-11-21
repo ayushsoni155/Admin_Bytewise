@@ -100,7 +100,7 @@
     align-items: center;
     gap: 10px;
     margin-bottom: 20px;
-    flex-wrap: wrap;
+    flex-wrap:nowrap;
 }
 
 .search-box,
@@ -130,7 +130,20 @@
 .update-btn:hover {
     background-color: #3b7bc4;
 }
+.filter-dropdown {
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
 
+.filter-dropdown:focus {
+    border-color: #4d97e1;
+    box-shadow: 0 0 5px rgba(77, 151, 225, 0.5);
+}
 /* Responsive Design */
 @media screen and (max-width: 768px) {
     #admin-order-body {
