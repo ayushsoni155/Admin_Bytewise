@@ -12,7 +12,7 @@ const AdminProduct = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch("http://localhost:3000/products");
+      const response = await fetch("https://server-admin-bytewise.vercel.app/api/productData");
       if (!response.ok) {
         throw new Error("Failed to fetch products");
       }
@@ -35,7 +35,7 @@ const AdminProduct = () => {
 
   const handleUpdate = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/products/${editProduct.subject_code}`, {
+      const response = await fetch(`https://server-admin-bytewise.vercel.app/api/product/${editProduct.subject_code}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
