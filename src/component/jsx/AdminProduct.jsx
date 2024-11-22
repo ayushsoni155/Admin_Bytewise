@@ -18,7 +18,7 @@ const AdminProduct = () => {
       }
       const data = await response.json();
       console.log(data);
-      setProducts(Array.isArray(data) ? data : []);  // Ensure it's an array
+      setProducts(data.products);  // Ensure it's an array
        console.log(products); // Debug log
     } catch (error) {
       console.error("Error fetching products:", error);
