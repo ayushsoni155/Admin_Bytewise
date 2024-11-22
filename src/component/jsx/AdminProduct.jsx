@@ -17,9 +17,9 @@ const AdminProduct = () => {
         throw new Error("Failed to fetch products");
       }
       const data = await response.json();
-      console.log(data.products);
+    
       setProducts(Array.isArray(data.products) ? data.products : []);  // Ensure it's an array
-       console.log(products); // Debug log
+  
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -101,7 +101,7 @@ const AdminProduct = () => {
                     onChange={handleInputChange}
                   />
                 ) : (
-                  product.cost_price
+                  product.costPrice
                 )}
               </td>
               <td>
@@ -114,7 +114,7 @@ const AdminProduct = () => {
                     onChange={handleInputChange}
                   />
                 ) : (
-                  product.selling_price
+                  product.sellingPrice
                 )}
               </td>
               <td>
