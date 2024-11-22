@@ -1,260 +1,109 @@
-/* Header Styling */
+/* General Styling */
 header {
-    background-color: #4d97e1;
-    padding: 5px 10px;
-    color: white;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Container for Flexbox Alignment */
-  .container {
-    gap: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  /* Logo Styling */
-  .logo {
-    display: flex;
-    flex-direction: row; /* Align the logo image and tagline side by side */
-    align-items: center; /* Vertically align both elements */
-  }
-  
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  background-color: #4d97e1;
+  color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Logo Section */
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.logo-img {
+  width: 60px;
+  margin-right: 10px;
+}
+
+#tagline {
+  font-size: 16px;
+  color: white;
+}
+
+/* Menu Icon */
+.menu-icon {
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+  margin: 10px;
+}
+
+/* Side Navbar */
+.side-nav {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  height: 100%;
+  width: 250px;
+  background-color: #333;
+  color: white;
+  transition: 0.3s ease-in-out;
+  padding-top: 60px;
+  z-index: 200;
+}
+
+.side-nav.open {
+  left: 0;
+}
+
+.side-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.side-nav ul li {
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.side-nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+  transition: color 0.3s;
+}
+
+.side-nav ul li a:hover {
+  color: crimson;
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 150;
+  display: block;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
   .logo-img {
-    width: 80px; /* Set a base width for the logo */
-    height: auto; /* Maintain aspect ratio */
-    margin-right: 10px; /* Space between logo and tagline */
+    width: 50px;
   }
-  
+
   #tagline {
-    font-size: 22px;
-    font-weight: 400;
-    color: rgb(0, 48, 85);
+    font-size: 14px;
   }
-  
-  /* Navigation Menu Styling */
-  nav {
-    display: flex;
-    align-items: center;
-  }
-  
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    margin: 0;
-  }
-  
-  nav ul li {
-    position: relative;
-  }
-  
-  nav ul li a {
-    text-decoration: none;
-    color: white;
-    font-size: 22px;
-    font-weight: 500;
-    padding: 8px 12px;
-    transition: color 0.3s ease, border-bottom 0.3s ease;
-  }
-  
-  nav ul li a:hover {
-    color: crimson;
-  }
-  
-  nav ul li a::after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 2px;
-    background: crimson;
-    transition: width 0.3s ease;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  }
-  
-  nav ul li a:hover::after {
-    width: 100%;
-  }
-  
-  /* Menu Icon for Mobile View */
+}
+
+@media screen and (max-width: 480px) {
   .menu-icon {
-    display: none;
-    font-size: 28px;
-    color: white;
-    cursor: pointer;
+    font-size: 24px;
   }
-  
-  /* Login Button Styling */
-  #LoginBtn {
-    font-family: stylish, serif; /* Keep the existing font */
-    font-size: 20px; /* Base font size */
-    font-weight: 600; /* Font weight */
-    border-radius: 10px; /* Rounded corners */
-    background-color: rgb(255, 255, 255); /* Background color */
-    border: 1px solid crimson; /* White border */
-    color: white; /* Text color */
-    padding: 10px; /* Increased padding for better touch area */
-    padding-top: 0px;
-    padding-bottom: 0px;
-    text-align: center; /* Center text alignment */
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
-    cursor: pointer; /* Pointer cursor on hover */
-    margin-left: 10px; /* Space between buttons */
+
+  .side-nav ul li a {
+    font-size: 16px;
   }
-  
-  #LoginBtn a {
-    color: #4d97e1; /* Set the text color to white */
-    text-decoration: none; /* Remove underline */
-    display: block; /* Make link fill the button */
-    height: 100%; /* Ensure it fills the button's height */
-    width: 100%; /* Ensure it fills the button's width */
-    line-height: 1.75; /* Center text vertically */
-  }
-  
-  /* Hover Effects */
-  #LoginBtn:hover {
-    background-color: #e63946; /* Darker shade of crimson on hover */
-    box-shadow: 1px 1px 20px crimson; /* Subtle shadow effect */
-    transform: scale(1.05); /* Slightly increase button size on hover */
-  }
-  
-  #LoginBtn:hover a {
-    color: white; /* Keep text color white on hover */
-  }
-  
-  /* Cart Button Styling */
-  .cartprofile {
-    font-size: 30px;
-    background-color: transparent; /* Make the background transparent */
-    border: none;
-    color: white;
-    margin-left: 20px; /* Space between buttons */
-    cursor: pointer; /* Pointer cursor on hover */
-  }
-  
-  /* Profile Button Styling */
-  .profile-btn {
-    width:26px;
-     height:26px;
-    font-size: 34px; /* Increase font size for profile icon */
-    background-color: transparent; /* Make the background transparent */
-    border: none;
-    color: white;
-    margin-left: 20px; /* Space between buttons */
-    cursor: pointer; /* Pointer cursor on hover */
-  }
-  
-  .profile-btn a {
-    color: white; /* Set the text color to white */
-    text-decoration: none; /* Remove underline */
-    display: block;
-  }
-  
-  /* Hover Effects for Cart and Profile */
-  .cartprofile a, .profile-btn a {
-    display: flex;
-    align-items: center;
-    color: white;
-  }
-  
-  .cartprofile a:hover,
-  .profile-btn a:hover {
-    transform: scale(1.1); /* Scale effect on hover */
-    transition: 0.3s ease;
-    color: crimson; /* Change color on hover */
-  }
-  
-  /* Responsive Design */
-  @media screen and (max-width: 768px) {
-    nav ul {
-      display: none; /* Hide the menu by default */
-    }
-  
-    nav.nav-active ul {
-      display: flex;
-      background-color: rgba(77, 151, 225, 0.9); /* Semi-transparent background */
-      flex-direction: column; /* Stack items vertically */
-      position: absolute;
-      top: 80px;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      padding: 20px;
-      z-index: 200;
-    }
-  
-    nav ul li {
-      padding: 10px 0; /* Add padding for clickable items */
-    }
-  
-    /* Display Menu Icon for Mobile */
-    .menu-icon {
-      display: block; /* Show the menu icon */
-    }
-  
-    /* Adjust logo size for mobile */
-    .logo-img {
-      width: 100px; /* Make the logo smaller on mobile */
-    }
-  
-    /* Adjust logo font size for mobile */
-    .logo h1 {
-      font-size: 36px;
-    }
-  
-    /* Adjust tagline font size for mobile */
-    #tagline {
-      font-size: 16px;
-    }
-  
-    /* Adjust login button size for mobile */
-    #LoginBtn {
-      font-size: 18px; /* Slightly smaller font for mobile */
-      padding: 8px 16px; /* Adjust padding for mobile */
-    }
-  
-    /* Adjust cart button size for mobile */
-    #cartbtn {
-      font-size: 28px; /* Adjust cart icon size for mobile */
-    }
-  }
-  
-  @media screen and (max-width: 480px) {
-    .logo-img {
-      width: 80px; /* Further decrease logo size for very small screens */
-    }
-  
-    .logo h1 {
-      font-size: 32px; /* Further decrease logo size */
-    }
-  
-    #tagline {
-      font-size: 14px; /* Further decrease tagline size */
-    }
-  
-    nav ul li a {
-      font-size: 20px; /* Adjust link font size */
-    }
-  
-    #LoginBtn {
-      font-size: 16px; /* Further reduce font size for smaller screens */
-      padding: 3px 6px; /* Adjust padding for smaller screens */
-    }
-  
-    /* Adjust cart button size for mobile */
-    #cartbtn {
-      
-      font-size: 26px; /* Further adjust cart icon size for smaller screens */
-    }
-  }
-  
+}
