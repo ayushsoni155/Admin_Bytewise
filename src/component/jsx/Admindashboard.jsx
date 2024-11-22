@@ -135,7 +135,7 @@ const Admindashboard = () => {
   // Function to fetch dashboard data
   const fetchDashboardData = async (date) => {
     try {
-      let url = 'http://localhost:3000/dashboard-data';
+      let url = 'https://server-admin-bytewise.vercel.app/api/dashboard-data';
       if (date) {
         url = `${url}?date=${date}`; // Append the selected date to the URL
       }
