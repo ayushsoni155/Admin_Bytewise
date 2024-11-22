@@ -34,26 +34,27 @@ const AdminProduct = () => {
     setEditProduct((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleUpdate = async () => {
-    try {
-      const response = await fetch(`https://server-admin-bytewise.vercel.app/api/product/${editProduct.subject_code}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(editProduct),
-      });
+ const handleUpdate = async () => {
+  try {
+    const response = await fetch(`https://server-admin-bytewise.vercel.app/api/product/${editProduct.subject_code}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(editProduct),
+      credentials: 'include', // Ensure credentials are included
+    });
 
-      if (!response.ok) {
-        throw new Error("Failed to update product");
-      }
-
-      setEditProduct(null);
-      fetchProducts(); // Refresh product list
-    } catch (error) {
-      console.error("Error updating product:", error);
+    if (!response.ok) {
+      throw new Error("Failed to update product");
     }
-  };
+
+    setEditProduct(null);
+    fetchProducts(); // Refresh product list
+  } catch (error) {
+    console.error("Error updating product:", error);
+  }
+};
 
   const handleCancel = () => {
     setEditProduct(null);
