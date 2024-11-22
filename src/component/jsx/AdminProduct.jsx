@@ -17,7 +17,8 @@ const AdminProduct = () => {
         throw new Error("Failed to fetch products");
       }
       const data = await response.json();
-      setProducts(data);  // Ensure it's an array
+      console.log("Fetched products:", data); // Debug log
+      setProducts(Array.isArray(data) ? data : []);  // Ensure it's an array
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -73,9 +74,9 @@ const AdminProduct = () => {
         </thead>
         <tbody>
           {Array.isArray(products) && products.map((product) => (
-            <tr key={products.subject_code}>
-              <td>{products.subject_code}</td>
-              <td>{products.product_name}</td>
+            <tr key={product.subject_code}>
+              <td>{product.subject_code}</td>
+              <td>{product.product_name}</td>
               <td>
                 {editProduct && editProduct.subject_code === product.subject_code ? (
                   <input
