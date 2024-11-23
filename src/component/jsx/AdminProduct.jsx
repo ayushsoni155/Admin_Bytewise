@@ -35,7 +35,7 @@ const AdminProduct = () => {
   // Handle Search
   const handleSearch = () => {
     const product = products.find(
-      (product) => product.subject_code === searchSubjectCode
+      (product) => product.subject_code === searchSubjectCode.toUpperCase()
     );
     if (product) {
       setFilteredProduct(product);
@@ -113,7 +113,6 @@ const AdminProduct = () => {
           value={searchSubjectCode}
           onChange={(e) => setSearchSubjectCode(e.target.value)}
           className="search-box"
-           style="text-transform:uppercase" 
         />
         <select
           value={selectedField}
