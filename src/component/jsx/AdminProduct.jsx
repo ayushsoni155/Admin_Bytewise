@@ -155,8 +155,8 @@ const AdminProduct = () => {
               <td>{product.subject_code}</td>
               <td>{product.product_name}</td>
               <td>{product.pages}</td>
-              <td>{product.cost_price}</td>
-              <td>{product.selling_price}</td>
+              <td>{product.costPrice}</td>
+              <td>{product.sellingPrice}</td>
             </tr>
           ))}
         </tbody>
