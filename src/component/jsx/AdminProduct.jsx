@@ -113,6 +113,7 @@ const AdminProduct = () => {
           value={searchSubjectCode}
           onChange={(e) => setSearchSubjectCode(e.target.value)}
           className="search-box"
+           style="text-transform:uppercase" 
         />
         <select
           value={selectedField}
@@ -120,8 +121,8 @@ const AdminProduct = () => {
           className="field-dropdown"
         >
           <option value="product_name">Name</option>
-          <option value="cost_price">Cost Price</option>
-          <option value="selling_price">Selling Price</option>
+          <option value="costPrice">Cost Price</option>
+          <option value="sellingPrice">Selling Price</option>
           <option value="pages">Pages</option>
         </select>
         <input
