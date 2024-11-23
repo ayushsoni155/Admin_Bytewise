@@ -9,6 +9,7 @@ import AdminUser from './component/jsx/AdminUser';
 import AdminFeedback from './component/jsx/AdminFeedback';
 import AdminOrder from './component/jsx/AdminOrder';
 import AdminProduct from './component/jsx/AdminProduct';
+import AdminSales from './component/jsx/AdminSales';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/Feedback" element={<AdminFeedback/>} />
         <Route path="/Order" element={<AdminOrder/>} />
         <Route path="/Product" element={<AdminProduct/>} />
+        <Route path="/Sales" element={<AdminSales/>} />
      </Routes>
     </Router>
   );
