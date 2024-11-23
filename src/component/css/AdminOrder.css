@@ -161,10 +161,7 @@
         gap: 15px;
     }
 
-    .search-box,
-    .status-dropdown {
-        width: 100%;
-    }
+    
 
     .admin-order-table th,
     .admin-order-table td {
