@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+
+     import React, { useState, useEffect } from "react";
 import "../css/AdminSales.css";
 
 const AdminSales = () => {
   const [sales, setSales] = useState([]);
   const [filteredSales, setFilteredSales] = useState([]);
   const [filterType, setFilterType] = useState("all");
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
   const [totalSales, setTotalSales] = useState(0);
 
   useEffect(() => {
@@ -31,11 +34,11 @@ const AdminSales = () => {
     setTotalSales(total);
   };
 
-  const filterSales = (type) => {
+  const filterSales = () => {
     const now = new Date();
     let filtered = [];
 
-    switch (type) {
+    switch (filterType) {
       case "daily":
         filtered = sales.filter(
           (sale) => new Date(sale.order_date).toDateString() === now.toDateString()
@@ -52,18 +55,15 @@ const AdminSales = () => {
         );
         break;
       case "monthly":
-        const currentMonth = now.getMonth();
-        const currentYear = now.getFullYear();
         filtered = sales.filter(
           (sale) =>
-            new Date(sale.order_date).getMonth() === currentMonth &&
-            new Date(sale.order_date).getFullYear() === currentYear
+            new Date(sale.order_date).getMonth() === selectedMonth &&
+            new Date(sale.order_date).getFullYear() === selectedYear
         );
         break;
       case "yearly":
-        const currentYearOnly = now.getFullYear();
         filtered = sales.filter(
-          (sale) => new Date(sale.order_date).getFullYear() === currentYearOnly
+          (sale) => new Date(sale.order_date).getFullYear() === selectedYear
         );
         break;
       default:
@@ -75,8 +75,16 @@ const AdminSales = () => {
   };
 
   useEffect(() => {
-    filterSales(filterType);
-  }, [filterType, sales]);
+    filterSales();
+  }, [filterType, sales, selectedYear, selectedMonth]);
+
+  const handleYearChange = (e) => {
+    setSelectedYear(e.target.value);
+  };
+
+  const handleMonthChange = (e) => {
+    setSelectedMonth(e.target.value);
+  };
 
   return (
     <div className="admin-sales">
@@ -95,6 +103,40 @@ const AdminSales = () => {
           <option value="monthly">Monthly</option>
           <option value="yearly">Yearly</option>
         </select>
+
+        {filterType === "monthly" || filterType === "yearly" ? (
+          <>
+            <label htmlFor="year">Year:</label>
+            <select
+              id="year"
+              value={selectedYear}
+              onChange={handleYearChange}
+            >
+              {[...Array(5).keys()].map((i) => (
+                <option key={i} value={new Date().getFullYear() - i}>
+                  {new Date().getFullYear() - i}
+                </option>
+              ))}
+            </select>
+          </>
+        ) : null}
+
+        {filterType === "monthly" ? (
+          <>
+            <label htmlFor="month">Month:</label>
+            <select
+              id="month"
+              value={selectedMonth}
+              onChange={handleMonthChange}
+            >
+              {Array.from({ length: 12 }, (_, i) => (
+                <option key={i} value={i}>
+                  {new Date(0, i).toLocaleString("en-US", { month: "long" })}
+                </option>
+              ))}
+            </select>
+          </>
+        ) : null}
       </div>
 
       <table className="sales-table">
