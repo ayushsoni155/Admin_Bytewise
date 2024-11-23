@@ -25,6 +25,7 @@
 .admin-product-actions {
     display: flex;
     flex-wrap: wrap;
+    align-items: center
     justify-content: space-between;
     gap: 15px;
     margin-bottom: 20px;
@@ -33,13 +34,12 @@
 .search-box,
 .value-input,
 .field-dropdown {
-    flex: 1;
-    min-width: 200px;
     padding: 10px;
     border: 1px solid #dee2e6;
-    border-radius: 6px;
+    border-radius: 4px;
     font-size: 1rem;
-    background-color: #ffffff;
+    width: 250px;
+    max-width: 100%;
     transition: box-shadow 0.3s;
 }
 
