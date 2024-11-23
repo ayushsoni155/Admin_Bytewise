@@ -58,12 +58,12 @@ const AdminProduct = () => {
   }
 
   try {
-    const response = await fetch(`https://server-admin-bytewise.vercel.app/api/products/${searchSubjectCode}`, {
+    const response = await fetch(`https://server-admin-bytewise.vercel.app/api/products`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ field: selectedField, value: newValue }),
+      body: JSON.stringify({subject_code:searchSubjectCode, field: selectedField, value: newValue }),
     });
 
     if (!response.ok) {
