@@ -1,16 +1,17 @@
 /* General Layout */
-#admin-product-container{
-    margin: 100px auto;
+#admin-product-container {
+    margin: 80px auto;
     padding: 20px;
     font-family: 'Poppins', sans-serif;
     background-color: #f8f9fa;
     border-radius: 12px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    max-width: 1200px;
+    max-width: 95%;
+    width: 1200px;
 }
 
 /* Heading */
-.admin-product-heading {
+#admin-product-heading {
     text-align: center;
     margin-bottom: 20px;
     font-size: 2.2rem;
@@ -18,6 +19,69 @@
     letter-spacing: 2px;
     color: #343a40;
     font-weight: bold;
+}
+
+/* Actions Section */
+.admin-product-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.search-box,
+.value-input,
+.field-dropdown {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #ffffff;
+    transition: box-shadow 0.3s;
+}
+
+.search-box:focus,
+.value-input:focus,
+.field-dropdown:focus {
+    border-color: #4d97e1;
+    box-shadow: 0 0 5px rgba(77, 151, 225, 0.5);
+    outline: none;
+}
+
+/* Buttons */
+.search-btn,
+.update-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #ffffff;
+    cursor: pointer;
+    background-color: #4d97e1;
+    transition: background-color 0.3s, transform 0.2s;
+    flex: 1;
+    min-width: 150px;
+    max-width: 200px;
+}
+
+.update-btn {
+    background-color: #28a745;
+}
+
+.search-btn:hover {
+    background-color: #367bb5;
+}
+
+.update-btn:hover {
+    background-color: #218838;
+}
+
+.search-btn:active,
+.update-btn:active {
+    transform: scale(0.95);
 }
 
 /* Table Styles */
@@ -38,6 +102,7 @@
     padding: 15px;
     text-align: left;
     font-size: 1rem;
+    white-space: nowrap;
 }
 
 .admin-product-table th {
@@ -47,7 +112,7 @@
 }
 
 .admin-product-table tr:nth-child(even) {
-    background-color: #f1f1f1;
+    background-color: #f8f9f9;
 }
 
 .admin-product-table tr:hover {
@@ -55,57 +120,36 @@
     transition: background-color 0.3s;
 }
 
-/* Input Fields */
-.admin-product-input {
-    width: 90%;
-    padding: 10px;
-    border: 1px solid #dee2e6;
-    border-radius: 4px;
-    font-size: 1rem;
-    background-color: #ffffff;
-}
-
-.admin-product-input:focus {
-    border-color: #4d97e1;
-    outline: none;
-    box-shadow: 0 0 5px rgba(77, 151, 225, 0.5);
-}
-
-/* Buttons */
-.admin-product-btn {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    color: #ffffff;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-.admin-product-btn.edit-btn {
-    background-color: #4d97e1;
-}
-
-.admin-product-btn.save-btn {
-    background-color: #28a745;
-}
-
-.admin-product-btn.cancel-btn {
-    background-color: #dc3545;
-}
-
-.admin-product-btn:hover {
-    transform: scale(1.05);
+/* Fade-In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    #admin-product-body {
+    #admin-product-container {
+        margin: 50px auto;
         padding: 15px;
     }
 
-    .admin-product-heading {
+    #admin-product-heading {
         font-size: 1.8rem;
+    }
+
+    .admin-product-actions {
+        flex-direction: column;
+    }
+
+    .search-btn,
+    .update-btn {
+        width: 100%;
     }
 
     .admin-product-table th,
@@ -116,7 +160,7 @@
 }
 
 @media (max-width: 480px) {
-    .admin-product-heading {
+    #admin-product-heading {
         font-size: 1.5rem;
     }
 
@@ -130,8 +174,8 @@
         font-size: 0.8rem;
     }
 
-    .admin-product-btn {
-        width: 100%;
+    .search-btn,
+    .update-btn {
         text-align: center;
     }
 }
