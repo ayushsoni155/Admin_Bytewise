@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../css/AdminExpenses.css";
-import Notification from "./Notification"; // Import the Notification component
+import Notification from "../jsx/Notification"; // Import the Notification component
 
 const AdminExpenses = () => {
   const [expenses, setExpenses] = useState([]);
@@ -21,7 +21,7 @@ const AdminExpenses = () => {
 
   const fetchExpenses = async () => {
     try {
-      const response = await fetch("http://localhost:3000/expensesData"); // Replace with your API endpoint
+      const response = await fetch("https://server-admin-bytewise.vercel.app/api/expensesData"); // Replace with your API endpoint
       if (!response.ok) throw new Error("Failed to fetch expenses");
       const data = await response.json();
       setExpenses(data);
@@ -51,7 +51,7 @@ const AdminExpenses = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/expenses", {
+      const response = await fetch("https://server-admin-bytewise.vercel.app/api/expenses", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
