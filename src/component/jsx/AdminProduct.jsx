@@ -35,7 +35,7 @@ const AdminProduct = () => {
   // Handle Search
   const handleSearch = () => {
     const product = products.find(
-      (product) => product.subject_code === searchSubjectCode.toUpperCase()
+      (product) => product.subject_code === searchSubjectCode
     );
     if (product) {
       setFilteredProduct(product);
