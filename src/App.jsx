@@ -10,6 +10,7 @@ import AdminFeedback from './component/jsx/AdminFeedback';
 import AdminOrder from './component/jsx/AdminOrder';
 import AdminProduct from './component/jsx/AdminProduct';
 import AdminSales from './component/jsx/AdminSales';
+import AdminExpenses from './component/jsx/AdminExpenses';
 
 const App = () => {
   return (
@@ -22,6 +23,8 @@ const App = () => {
         <Route path="/Order" element={<AdminOrder/>} />
         <Route path="/Product" element={<AdminProduct/>} />
         <Route path="/Sales" element={<AdminSales/>} />
+        <Route path="/Expenses" element={<AdminExpenses/>} />
+        
      </Routes>
     </Router>
   );
