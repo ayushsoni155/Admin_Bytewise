@@ -7,9 +7,7 @@ const AdminExpenses = () => {
   const [newExpense, setNewExpense] = useState({
     description: "",
     amount: "",
-    category: "",
     expense_date: "",
-    payment_method: "",
     payment_by: "",
   });
   const [notification, setNotification] = useState({ message: "", type: "" }); // State for notifications
