@@ -41,7 +41,7 @@ const Adminnavbar = () => {
             <li><Link to="/User" onClick={handleLinkClick}>Users</Link></li>
             <li><Link to="/Feedback" onClick={handleLinkClick}>Feedback</Link></li>
             <li><Link to="/Product" onClick={handleLinkClick}>Product</Link></li>
-            <li><Link to="/" onClick={handleLinkClick}>Expense</Link></li>
+            <li><Link to="/Expenses" onClick={handleLinkClick}>Expenses</Link></li>
             <li><Link to="/" onClick={handleLinkClick}>Accounts</Link></li>
           </ul>
         </nav>
