@@ -10,10 +10,10 @@
 }
 
 /* Heading */
-.admin-sales-heading {
+.admin-sales h2 {
     text-align: center;
     margin-bottom: 20px;
-    font-size: 2.2rem;
+    font-size: 2.5rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     color: #343a40;
@@ -22,24 +22,32 @@
 
 /* Filters Section */
 .filters {
+    margin-bottom: 20px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: 15px;
-    margin-bottom: 20px;
     flex-wrap: wrap;
 }
 
-#filter{
-    padding: 10px;
-    border: 1px solid #dee2e6;
-    border-radius: 4px;
+.filters label {
     font-size: 1rem;
-    background-color: #ffffff;
-    cursor: pointer;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    font-weight: bold;
+    color: #495057;
 }
 
-.filter:focus {
+.filters select {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #dee2e6;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    width: 200px;
+    max-width: 100%;
+}
+
+.filters select:focus {
     border-color: #4d97e1;
     box-shadow: 0 0 5px rgba(77, 151, 225, 0.5);
 }
@@ -81,15 +89,13 @@
 
 /* Total Sales Section */
 .total-sales {
-    text-align: center;
     margin-top: 20px;
+    text-align: center;
     font-size: 1.5rem;
-    color: #343a40;
     font-weight: bold;
 }
 
-/* Loading and No Sales Text */
-.loading-text,
+/* Loading and No Sales Data Text */
 .no-sales-text {
     text-align: center;
     font-size: 1.2rem;
@@ -99,17 +105,17 @@
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
-    .admin-sales{
+    .admin-sales {
         padding: 15px;
     }
 
-    .admin-sales-heading {
+    .admin-sales h2 {
         font-size: 1.8rem;
     }
 
     .filters {
         flex-direction: column;
-        gap: 10px;
+        gap: 15px;
     }
 
     .sales-table th,
@@ -117,11 +123,15 @@
         padding: 10px;
         font-size: 0.9rem;
     }
+
+    .total-sales {
+        font-size: 1.2rem;
+    }
 }
 
 @media screen and (max-width: 480px) {
-    .admin-sales-heading {
-        font-size: 1.5rem;
+    .admin-sales h2 {
+        font-size: 1.6rem;
     }
 
     .sales-table {
@@ -134,7 +144,7 @@
         font-size: 0.8rem;
     }
 
-    .filter{
+    .filters select {
         width: 100%;
     }
 }
