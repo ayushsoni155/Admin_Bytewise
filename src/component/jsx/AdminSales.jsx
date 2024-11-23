@@ -85,6 +85,14 @@ const AdminSales = () => {
     setSelectedMonth(e.target.value);
   };
 
+  const formatDate = (date) => {
+    const d = new Date(date);
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+    const year = d.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
+
   return (
     <div className="admin-sales">
       <h2>Sales Overview</h2>
@@ -153,7 +161,7 @@ const AdminSales = () => {
               <tr key={sale.orderID}>
                 <td>{sale.orderID}</td>
                 <td>{sale.transactionID}</td>
-                <td>{new Date(sale.order_date).toLocaleDateString()}</td>
+                <td>{formatDate(sale.order_date)}</td>
                 <td>₹{sale.total_price.toFixed(2)}</td>
               </tr>
             ))
