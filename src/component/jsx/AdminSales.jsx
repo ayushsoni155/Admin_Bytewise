@@ -11,7 +11,7 @@ const AdminSales = () => {
     // Fetch sales data from the backend using fetch
     const fetchSales = async () => {
       try {
-        const response = await fetch("http://localhost:3000/sales"); // Replace with your API endpoint
+        const response = await fetch("https://server-admin-bytewise.vercel.app/api/sales"); // Replace with your API endpoint
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
