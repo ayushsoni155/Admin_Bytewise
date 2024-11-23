@@ -18,7 +18,7 @@ const AdminProduct = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch("http://localhost:3000/products");
+      const response = await fetch("https://server-admin-bytewise.vercel.app/api/productData");
       if (!response.ok) {
         throw new Error("Failed to fetch products");
       }
