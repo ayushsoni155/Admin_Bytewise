@@ -1,5 +1,4 @@
-
-     import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../css/AdminSales.css";
 
 const AdminSales = () => {
@@ -57,13 +56,13 @@ const AdminSales = () => {
       case "monthly":
         filtered = sales.filter(
           (sale) =>
-            new Date(sale.order_date).getMonth() === selectedMonth &&
-            new Date(sale.order_date).getFullYear() === selectedYear
+            new Date(sale.order_date).getMonth() === parseInt(selectedMonth) &&
+            new Date(sale.order_date).getFullYear() === parseInt(selectedYear)
         );
         break;
       case "yearly":
         filtered = sales.filter(
-          (sale) => new Date(sale.order_date).getFullYear() === selectedYear
+          (sale) => new Date(sale.order_date).getFullYear() === parseInt(selectedYear)
         );
         break;
       default:
