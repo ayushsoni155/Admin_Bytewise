@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "../css/AdminProduct.css";
+import Notification from "../jsx/Notification"; // Import your custom notification component
 
 const AdminProduct = () => {
   const [products, setProducts] = useState([]);
-  const [editProduct, setEditProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [searchSubjectCode, setSearchSubjectCode] = useState("");
+  const [filteredProduct, setFilteredProduct] = useState(null);
+  const [notification, setNotification] = useState(null); // State for notification
+  const [selectedField, setSelectedField] = useState("selling_price");
+  const [newValue, setNewValue] = useState("");
 
   // Fetch product details
   useEffect(() => {
@@ -12,57 +18,127 @@ const AdminProduct = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch("https://server-admin-bytewise.vercel.app/api/productData");
+      const response = await fetch("http://localhost:3000/products");
       if (!response.ok) {
         throw new Error("Failed to fetch products");
       }
       const data = await response.json();
-    
-      setProducts(Array.isArray(data.products) ? data.products : []);  // Ensure it's an array
-  
+      setProducts(data);
+      console.log(data)
     } catch (error) {
       console.error("Error fetching products:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleEdit = (product) => {
-    setEditProduct({ ...product });
+  // Handle Search
+  const handleSearch = () => {
+    const product = products.find(
+      (product) => product.subject_code === searchSubjectCode
+    );
+    if (product) {
+      setFilteredProduct(product);
+    } else {
+      setFilteredProduct(null);
+      setNotification({ message: "Product not found!", type: "error" });
+    }
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setEditProduct((prev) => ({ ...prev, [name]: value }));
-  };
-
- const handleUpdate = async () => {
-  try {
-    const response = await fetch(`https://server-admin-bytewise.vercel.app/api/product/${editProduct.subject_code}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(editProduct),
-      credentials: 'include', // Ensure credentials are included
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to update product");
+  // Handle Update Field
+  const handleUpdateField = async () => {
+    if (!filteredProduct) {
+      setNotification({ message: "Please search for a valid product first.", type: "error" });
+      return;
     }
 
-    setEditProduct(null);
-    fetchProducts(); // Refresh product list
-  } catch (error) {
-    console.error("Error updating product:", error);
-  }
-};
+    if (!newValue) {
+      setNotification({ message: "Please provide a new value.", type: "error" });
+      return;
+    }
 
-  const handleCancel = () => {
-    setEditProduct(null);
+    try {
+      const response = await fetch(`http://localhost:3000/products/${searchSubjectCode}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ [selectedField]: newValue }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update product");
+      }
+
+      setNotification({ message: "Product updated successfully!", type: "success" });
+
+      // Update the state to reflect the change
+      setProducts((prevProducts) =>
+        prevProducts.map((product) =>
+          product.subject_code === searchSubjectCode
+            ? { ...product, [selectedField]: newValue }
+            : product
+        )
+      );
+      setFilteredProduct(null);
+      setSearchSubjectCode("");
+      setNewValue("");
+    } catch (error) {
+      console.error("Error updating product:", error);
+      setNotification({ message: "Failed to update product.", type: "error" });
+    }
   };
+
+  if (loading) return <p className="loading-text">Loading products...</p>;
 
   return (
     <div id="admin-product-container">
       <h2 id="admin-product-heading">Product Management</h2>
+
+      {/* Notification Display */}
+      {notification && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={() => setNotification(null)}
+        />
+      )}
+
+      {/* Search and Update Section */}
+      <div className="admin-product-actions">
+        <input
+          type="text"
+          placeholder="Search by Subject Code"
+          value={searchSubjectCode}
+          onChange={(e) => setSearchSubjectCode(e.target.value)}
+          className="search-box"
+        />
+        <select
+          value={selectedField}
+          onChange={(e) => setSelectedField(e.target.value)}
+          className="field-dropdown"
+        >
+          <option value="product_name">Name</option>
+          <option value="cost_price">Cost Price</option>
+          <option value="selling_price">Selling Price</option>
+          <option value="pages">Pages</option>
+        </select>
+        <input
+          type="text"
+          placeholder="New Value"
+          value={newValue}
+          onChange={(e) => setNewValue(e.target.value)}
+          className="value-input"
+        />
+        <button onClick={handleSearch} className="search-btn">
+          Search
+        </button>
+        <button onClick={handleUpdateField} className="update-btn">
+          Update
+        </button>
+      </div>
+
+      {/* Products Table */}
       <table className="admin-product-table">
         <thead>
           <tr>
@@ -71,78 +147,16 @@ const AdminProduct = () => {
             <th>Pages</th>
             <th>Cost Price</th>
             <th>Selling Price</th>
-            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {Array.isArray(products) && products.map((product) => (
+          {(filteredProduct ? [filteredProduct] : products).map((product) => (
             <tr key={product.subject_code}>
               <td>{product.subject_code}</td>
               <td>{product.product_name}</td>
-              <td>
-                {editProduct && editProduct.subject_code === product.subject_code ? (
-                  <input
-                    type="number"
-                    className="admin-product-input"
-                    name="pages"
-                    value={editProduct.pages}
-                    onChange={handleInputChange}
-                  />
-                ) : (
-                  product.pages
-                )}
-              </td>
-              <td>
-                {editProduct && editProduct.subject_code === product.subject_code ? (
-                  <input
-                    type="number"
-                    className="admin-product-input"
-                    name="cost_price"
-                    value={editProduct.cost_price}
-                    onChange={handleInputChange}
-                  />
-                ) : (
-                  product.costPrice
-                )}
-              </td>
-              <td>
-                {editProduct && editProduct.subject_code === product.subject_code ? (
-                  <input
-                    type="number"
-                    className="admin-product-input"
-                    name="selling_price"
-                    value={editProduct.selling_price}
-                    onChange={handleInputChange}
-                  />
-                ) : (
-                  product.sellingPrice
-                )}
-              </td>
-              <td>
-                {editProduct && editProduct.subject_code === product.subject_code ? (
-                  <>
-                    <button
-                      className="admin-product-btn save-btn"
-                      onClick={handleUpdate}
-                    >
-                      Save
-                    </button>
-                    <button
-                      className="admin-product-btn cancel-btn"
-                      onClick={handleCancel}
-                    >
-                      Cancel
-                    </button>
-                  </>
-                ) : (
-                  <button
-                    className="admin-product-btn edit-btn"
-                    onClick={() => handleEdit(product)}
-                  >
-                    Edit
-                  </button>
-                )}
-              </td>
+              <td>{product.pages}</td>
+              <td>{product.cost_price}</td>
+              <td>{product.selling_price}</td>
             </tr>
           ))}
         </tbody>
