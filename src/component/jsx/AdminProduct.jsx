@@ -46,48 +46,49 @@ const AdminProduct = () => {
   };
 
   // Handle Update Field
-  const handleUpdateField = async () => {
-    if (!filteredProduct) {
-      setNotification({ message: "Please search for a valid product first.", type: "error" });
-      return;
+ const handleUpdateField = async () => {
+  if (!filteredProduct) {
+    setNotification({ message: "Please search for a valid product first.", type: "error" });
+    return;
+  }
+
+  if (!newValue) {
+    setNotification({ message: "Please provide a new value.", type: "error" });
+    return;
+  }
+
+  try {
+    const response = await fetch(`https://server-admin-bytewise.vercel.app/api/products/${searchSubjectCode}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ field: selectedField, value: newValue }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || "Failed to update product");
     }
 
-    if (!newValue) {
-      setNotification({ message: "Please provide a new value.", type: "error" });
-      return;
-    }
+    setNotification({ message: "Product updated successfully!", type: "success" });
 
-    try {
-      const response = await fetch(`http://localhost:3000/products/${searchSubjectCode}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ [selectedField]: newValue }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to update product");
-      }
-
-      setNotification({ message: "Product updated successfully!", type: "success" });
-
-      // Update the state to reflect the change
-      setProducts((prevProducts) =>
-        prevProducts.map((product) =>
-          product.subject_code === searchSubjectCode
-            ? { ...product, [selectedField]: newValue }
-            : product
-        )
-      );
-      setFilteredProduct(null);
-      setSearchSubjectCode("");
-      setNewValue("");
-    } catch (error) {
-      console.error("Error updating product:", error);
-      setNotification({ message: "Failed to update product.", type: "error" });
-    }
-  };
+    // Update the state to reflect the change
+    setProducts((prevProducts) =>
+      prevProducts.map((product) =>
+        product.subject_code === searchSubjectCode
+          ? { ...product, [selectedField]: newValue }
+          : product
+      )
+    );
+    setFilteredProduct(null);
+    setSearchSubjectCode("");
+    setNewValue("");
+  } catch (error) {
+    console.error("Error updating product:", error);
+    setNotification({ message: error.message || "Failed to update product.", type: "error" });
+  }
+};
 
   if (loading) return <p className="loading-text">Loading products...</p>;
 
