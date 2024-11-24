@@ -54,8 +54,9 @@ const AdminExpenses = () => {
         headers: {
           "Content-Type": "application/json",
         },
+        console.log(newExpense);
         body: JSON.stringify(newExpense),
-        console.log(newExpense)
+        
       });
 
       if (!response.ok) throw new Error("Failed to save expense");
