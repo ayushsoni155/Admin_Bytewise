@@ -169,6 +169,7 @@
     .filters {
         flex-direction: column;
         gap: 15px;
+        margin-top:5px;
     }
 
     .admin-expenses-table th,
