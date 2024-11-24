@@ -54,7 +54,7 @@ const AdminExpenses = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        console.log(newExpense);
+        console.log(newExpense),
         body: JSON.stringify(newExpense),
         
       });
