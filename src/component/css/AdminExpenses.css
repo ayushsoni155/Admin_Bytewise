@@ -76,6 +76,7 @@
 
 /* Filters Section */
 .filters {
+    margin-top:10px;
     margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
@@ -196,6 +197,7 @@
     .admin-expenses-table th,
     .admin-expenses-table td {
         font-size: 0.8rem;
+        width:100%;
     }
 
     .filters select {
