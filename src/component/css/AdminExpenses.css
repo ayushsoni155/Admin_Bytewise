@@ -1,5 +1,6 @@
 /* General Layout */
-#admin-expenses-body {
+#admin-expenses-body,
+.admin-sales {
     margin: 100px auto;
     padding: 20px;
     font-family: 'Poppins', sans-serif;
@@ -10,7 +11,8 @@
 }
 
 /* Heading */
-.admin-expenses-heading {
+.admin-expenses-heading,
+.admin-sales h2 {
     text-align: center;
     margin-bottom: 20px;
     font-size: 2.2rem;
@@ -20,17 +22,19 @@
     font-weight: bold;
 }
 
-/* Form Styles using Flexbox */
-.admin-expenses-form {
+/* Form and Filters Section */
+.admin-expenses-form,
+.filters {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     margin-bottom: 20px;
     align-items: flex-end;
-    justify-content: center
+    justify-content: center;
 }
 
-.admin-expenses-form label {
+.admin-expenses-form label,
+.filters label {
     font-size: 1rem;
     font-weight: 500;
     color: #495057;
@@ -40,7 +44,8 @@
 }
 
 .admin-expenses-form input,
-.admin-expenses-form select {
+.admin-expenses-form select,
+.filters select {
     padding: 10px;
     border: 1px solid #dee2e6;
     border-radius: 4px;
@@ -51,11 +56,13 @@
 }
 
 .admin-expenses-form input:focus,
-.admin-expenses-form select:focus {
+.admin-expenses-form select:focus,
+.filters select:focus {
     border-color: #4d97e1;
     box-shadow: 0 0 5px rgba(77, 151, 225, 0.5);
 }
 
+/* Save Button */
 .save-expense-btn {
     width: 20%;
     padding: 10px 15px;
@@ -73,7 +80,8 @@
 }
 
 /* Table Styles */
-.admin-expenses-table {
+.admin-expenses-table,
+.sales-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
@@ -85,57 +93,77 @@
 }
 
 .admin-expenses-table th,
-.admin-expenses-table td {
+.admin-expenses-table td,
+.sales-table th,
+.sales-table td {
     border: 1px solid #dee2e6;
     padding: 15px;
     text-align: left;
     font-size: 1rem;
 }
 
-.admin-expenses-table th {
+.admin-expenses-table th,
+.sales-table th {
     background-color: #4d97e1;
     color: #ffffff;
     text-transform: uppercase;
 }
 
-.admin-expenses-table tr:nth-child(even) {
+.admin-expenses-table tr:nth-child(even),
+.sales-table tr:nth-child(even) {
     background-color: #f1f1f1;
 }
 
-.admin-expenses-table tr:hover {
+.admin-expenses-table tr:hover,
+.sales-table tr:hover {
     background-color: #e9ecef;
     transition: background-color 0.3s;
 }
 
+/* Total Section */
+.total-sales {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
 /* Error and Success Messages */
+.expense-error,
+.no-sales-text {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+
 .expense-error {
     color: red;
-    font-size: 1rem;
-    text-align: center;
-    margin-bottom: 20px;
 }
 
 .expense-success {
     color: green;
-    font-size: 1rem;
-    text-align: center;
-    margin-bottom: 20px;
+}
+
+.no-sales-text {
+    color: #495057;
 }
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
-    #admin-expenses-body {
+    #admin-expenses-body,
+    .admin-sales {
         padding: 15px;
     }
 
-    .admin-expenses-heading {
+    .admin-expenses-heading,
+    .admin-sales h2 {
         font-size: 1.8rem;
     }
 
-    .admin-expenses-form {
+    .admin-expenses-form,
+    .filters {
         flex-direction: column;
-        justify-content: normal;
-        align-items: normal;
+        gap: 15px;
     }
 
     .save-expense-btn {
@@ -143,28 +171,38 @@
     }
 
     .admin-expenses-table th,
-    .admin-expenses-table td {
+    .admin-expenses-table td,
+    .sales-table th,
+    .sales-table td {
         padding: 10px;
         font-size: 0.9rem;
+    }
+
+    .total-sales {
+        font-size: 1.2rem;
     }
 }
 
 @media screen and (max-width: 480px) {
-    .admin-expenses-heading {
+    .admin-expenses-heading,
+    .admin-sales h2 {
         font-size: 1.5rem;
     }
 
-    .admin-expenses-table {
+    .admin-expenses-table,
+    .sales-table {
         display: block;
         overflow-x: auto;
     }
 
     .admin-expenses-table th,
-    .admin-expenses-table td {
+    .admin-expenses-table td,
+    .sales-table th,
+    .sales-table td {
         font-size: 0.8rem;
     }
 
-    .save-expense-btn {
-        text-align: center;
+    .filters select {
+        width: 100%;
     }
 }
