@@ -4,46 +4,97 @@ import Notification from "../jsx/Notification"; // Import the Notification compo
 
 const AdminExpenses = () => {
   const [expenses, setExpenses] = useState([]);
+  const [filteredExpenses, setFilteredExpenses] = useState([]);
   const [newExpense, setNewExpense] = useState({
-   expenses_items:"",
-      expenses_amount:"",
-      expenses_date:"",
-      payment_by:"",
+    expenses_items: "",
+    expenses_amount: "",
+    expenses_date: "",
+    payment_by: "",
   });
-  const [notification, setNotification] = useState({ message: "", type: "" }); // State for notifications
+  const [filterType, setFilterType] = useState("all");
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
+  const [totalExpenses, setTotalExpenses] = useState(0);
+  const [notification, setNotification] = useState({ message: "", type: "" });
 
-  // Fetch all expenses
   useEffect(() => {
     fetchExpenses();
   }, []);
 
   const fetchExpenses = async () => {
     try {
-      const response = await fetch("https://server-admin-bytewise.vercel.app/api/expensesData"); // Replace with your API endpoint
+      const response = await fetch(
+        "https://server-admin-bytewise.vercel.app/api/expensesData"
+      ); // Replace with your API endpoint
       if (!response.ok) throw new Error("Failed to fetch expenses");
       const data = await response.json();
       setExpenses(data);
+      setFilteredExpenses(data);
+      calculateTotal(data);
     } catch (err) {
       console.error("Error fetching expenses:", err);
       setNotification({ message: "Error fetching expenses.", type: "error" });
     }
   };
 
-  // Handle input changes
+  const calculateTotal = (data) => {
+    const total = data.reduce((sum, expense) => sum + parseFloat(expense.expenses_amount || 0), 0);
+    setTotalExpenses(total);
+  };
+
+  const filterExpenses = () => {
+    const now = new Date();
+    let filtered = [];
+
+    switch (filterType) {
+      case "daily":
+        filtered = expenses.filter(
+          (expense) => new Date(expense.expenses_date).toDateString() === now.toDateString()
+        );
+        break;
+      case "weekly":
+        const weekStart = new Date();
+        weekStart.setDate(now.getDate() - now.getDay());
+        const weekEnd = new Date(weekStart);
+        weekEnd.setDate(weekStart.getDate() + 6);
+        filtered = expenses.filter(
+          (expense) =>
+            new Date(expense.expenses_date) >= weekStart &&
+            new Date(expense.expenses_date) <= weekEnd
+        );
+        break;
+      case "monthly":
+        filtered = expenses.filter(
+          (expense) =>
+            new Date(expense.expenses_date).getMonth() === parseInt(selectedMonth) &&
+            new Date(expense.expenses_date).getFullYear() === parseInt(selectedYear)
+        );
+        break;
+      case "yearly":
+        filtered = expenses.filter(
+          (expense) =>
+            new Date(expense.expenses_date).getFullYear() === parseInt(selectedYear)
+        );
+        break;
+      default:
+        filtered = expenses;
+    }
+
+    setFilteredExpenses(filtered);
+    calculateTotal(filtered);
+  };
+
+  useEffect(() => {
+    filterExpenses();
+  }, [filterType, expenses, selectedYear, selectedMonth]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewExpense((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Save a new expense
   const saveExpense = async () => {
-    // Validation
-    if (
-      !newExpense.expenses_items||
-      !newExpense. expenses_amount||
-      !newExpense. expenses_date ||
-      !newExpense.payment_by
-    ) {
+    if (!newExpense.expenses_items || !newExpense.expenses_amount || !newExpense.expenses_date || !newExpense.payment_by) {
       setNotification({ message: "Please fill in all required fields.", type: "error" });
       return;
     }
@@ -55,18 +106,16 @@ const AdminExpenses = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newExpense),
-        
       });
 
       if (!response.ok) throw new Error("Failed to save expense");
 
-      const savedExpense = await response.json();
-      setExpenses([...expenses, savedExpense]); // Add new expense to the list
+      await fetchExpenses(); // Refetch expenses after adding a new one
       setNewExpense({
-        expenses_items:"",
-      expenses_amount:"",
-      expenses_date:"",
-      payment_by:"",
+        expenses_items: "",
+        expenses_amount: "",
+        expenses_date: "",
+        payment_by: "",
       });
       setNotification({ message: "Expense saved successfully!", type: "success" });
     } catch (err) {
@@ -75,11 +124,18 @@ const AdminExpenses = () => {
     }
   };
 
+  const formatDate = (date) => {
+    const d = new Date(date);
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+    const year = d.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
+
   return (
     <div id="admin-expenses-body">
       <h2 className="admin-expenses-heading">Expenses</h2>
 
-      {/* Display Notification */}
       {notification.message && (
         <Notification
           message={notification.message}
@@ -88,7 +144,6 @@ const AdminExpenses = () => {
         />
       )}
 
-      {/* Form to add a new expense */}
       <div className="admin-expenses-form">
         <div>
           <label>Expense Items:</label>
@@ -139,37 +194,74 @@ const AdminExpenses = () => {
         </button>
       </div>
 
-      {/* Display all expenses */}
-      <div>
-        <h3 className="admin-expenses-heading">All Expenses</h3>
-        <table className="admin-expenses-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Expense Items</th>
-              <th>Amount</th>
-              <th>Date</th>
-              <th>Payment By</th>
-            </tr>
-          </thead>
-          <tbody>
-            {expenses.length > 0 ? (
-              expenses.map((expense) => (
-                <tr key={expense.expensesID}>
-                  <td>{expense.expensesID}</td>
-                  <td>{expense.expenses_items}</td>
-                  <td>{expense.expenses_amount}</td>
-                  <td>{expense.expenses_date}</td>
-                  <td>{expense.payment_by}</td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="7">No expenses found.</td>
+      <div className="filters">
+        <label>Filter by:</label>
+        <select value={filterType} onChange={(e) => setFilterType(e.target.value)}>
+          <option value="all">All</option>
+          <option value="daily">Daily</option>
+          <option value="weekly">Weekly</option>
+          <option value="monthly">Monthly</option>
+          <option value="yearly">Yearly</option>
+        </select>
+
+        {(filterType === "monthly" || filterType === "yearly") && (
+          <>
+            <label>Year:</label>
+            <select value={selectedYear} onChange={(e) => setSelectedYear(e.target.value)}>
+              {[...Array(5).keys()].map((i) => (
+                <option key={i} value={new Date().getFullYear() - i}>
+                  {new Date().getFullYear() - i}
+                </option>
+              ))}
+            </select>
+          </>
+        )}
+
+        {filterType === "monthly" && (
+          <>
+            <label>Month:</label>
+            <select value={selectedMonth} onChange={(e) => setSelectedMonth(e.target.value)}>
+              {Array.from({ length: 12 }, (_, i) => (
+                <option key={i} value={i}>
+                  {new Date(0, i).toLocaleString("en-US", { month: "long" })}
+                </option>
+              ))}
+            </select>
+          </>
+        )}
+      </div>
+
+      <table className="admin-expenses-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Expense Items</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Payment By</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredExpenses.length > 0 ? (
+            filteredExpenses.map((expense) => (
+              <tr key={expense.expensesID}>
+                <td>{expense.expensesID}</td>
+                <td>{expense.expenses_items}</td>
+                <td>{expense.expenses_amount}</td>
+                <td>{formatDate(expense.expenses_date)}</td>
+                <td>{expense.payment_by}</td>
               </tr>
-            )}
-          </tbody>
-        </table>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="5">No expenses found.</td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+
+      <div className="total-expenses">
+        <h3>Total Expenses: ₹{totalExpenses.toFixed(2)}</h3>
       </div>
     </div>
   );
