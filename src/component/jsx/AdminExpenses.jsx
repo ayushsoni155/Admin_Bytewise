@@ -231,34 +231,35 @@ const AdminExpenses = () => {
         )}
       </div>
 
-      <table className="admin-expenses-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Expense Items</th>
-            <th>Amount</th>
-            <th>Date</th>
-            <th>Payment By</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredExpenses.length > 0 ? (
-            filteredExpenses.map((expense) => (
-              <tr key={expense.expensesID}>
-                <td>{expense.expensesID}</td>
-                <td>{expense.expenses_items}</td>
-                <td>{expense.expenses_amount}</td>
-                <td>{formatDate(expense.expenses_date)}</td>
-                <td>{expense.payment_by}</td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="5">No expenses found.</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+    <table className="admin-expenses-table">
+  <thead>
+    <tr>
+      <th>Serial No.</th>
+      <th>Expense Items</th>
+      <th>Amount</th>
+      <th>Date</th>
+      <th>Payment By</th>
+    </tr>
+  </thead>
+  <tbody>
+    {filteredExpenses.length > 0 ? (
+      filteredExpenses.map((expense, index) => (
+        <tr key={expense.expensesID}>
+          <td>{index + 1}</td> {/* Serial number */}
+          <td>{expense.expenses_items}</td>
+          <td>{expense.expenses_amount}</td>
+          <td>{formatDate(expense.expenses_date)}</td>
+          <td>{expense.payment_by}</td>
+        </tr>
+      ))
+    ) : (
+      <tr>
+        <td colSpan="5">No expenses found.</td>
+      </tr>
+    )}
+  </tbody>
+</table>
+
 
       <div className="total-expenses">
         <h3>Total Expenses: ₹{totalExpenses.toFixed(2)}</h3>
