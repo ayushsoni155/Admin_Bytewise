@@ -1,5 +1,6 @@
 /* General styling for the body of AdminExpenses */
 #admin-expenses-body {
+  margin-top:100px;
   font-family: Arial, sans-serif;
   padding: 20px;
   background-color: #f9f9f9;
