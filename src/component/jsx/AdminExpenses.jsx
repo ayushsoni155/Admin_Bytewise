@@ -5,10 +5,10 @@ import Notification from "../jsx/Notification"; // Import the Notification compo
 const AdminExpenses = () => {
   const [expenses, setExpenses] = useState([]);
   const [newExpense, setNewExpense] = useState({
-    description: "",
-    amount: "",
-    expense_date: "",
-    payment_by: "",
+   expenses_items:"",
+      expenses_amount:"",
+      expenses_date:"",
+      payment_by:"",
   });
   const [notification, setNotification] = useState({ message: "", type: "" }); // State for notifications
 
@@ -39,9 +39,9 @@ const AdminExpenses = () => {
   const saveExpense = async () => {
     // Validation
     if (
-      !newExpense.description ||
-      !newExpense.amount ||
-      !newExpense.expense_date ||
+      !newExpense.expenses_items||
+      !newExpense. expenses_amount||
+      !newExpense. expenses_date ||
       !newExpense.payment_by
     ) {
       setNotification({ message: "Please fill in all required fields.", type: "error" });
@@ -62,10 +62,10 @@ const AdminExpenses = () => {
       const savedExpense = await response.json();
       setExpenses([...expenses, savedExpense]); // Add new expense to the list
       setNewExpense({
-        description: "",
-        amount: "",
-        expense_date: "",
-        payment_by: "",
+        expenses_items:"",
+      expenses_amount:"",
+      expenses_date:"",
+      payment_by:"",
       });
       setNotification({ message: "Expense saved successfully!", type: "success" });
     } catch (err) {
@@ -90,11 +90,11 @@ const AdminExpenses = () => {
       {/* Form to add a new expense */}
       <div className="admin-expenses-form">
         <div>
-          <label>Description:</label>
+          <label>Expense Items:</label>
           <input
             type="text"
-            name="description"
-            value={newExpense.description}
+            name="expenses_items"
+            value={newExpense.expenses_items}
             onChange={handleInputChange}
             required
           />
@@ -103,8 +103,8 @@ const AdminExpenses = () => {
           <label>Amount:</label>
           <input
             type="number"
-            name="amount"
-            value={newExpense.amount}
+            name="expenses_amount"
+            value={newExpense.expenses_amount}
             onChange={handleInputChange}
             required
           />
@@ -113,8 +113,8 @@ const AdminExpenses = () => {
           <label>Date:</label>
           <input
             type="datetime-local"
-            name="expense_date"
-            value={newExpense.expense_date}
+            name="expenses_date"
+            value={newExpense.expenses_date}
             onChange={handleInputChange}
             required
           />
@@ -145,7 +145,7 @@ const AdminExpenses = () => {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Description</th>
+              <th>Expense Items</th>
               <th>Amount</th>
               <th>Date</th>
               <th>Payment By</th>
@@ -154,11 +154,11 @@ const AdminExpenses = () => {
           <tbody>
             {expenses.length > 0 ? (
               expenses.map((expense) => (
-                <tr key={expense.expenseID}>
-                  <td>{expense.expenseID}</td>
-                  <td>{expense.description}</td>
-                  <td>{expense.amount}</td>
-                  <td>{expense.expense_date}</td>
+                <tr key={expense.expensesID}>
+                  <td>{expense.expensesID}</td>
+                  <td>{expense.expenses_items}</td>
+                  <td>{expense.expenses_amount}</td>
+                  <td>{expense.expenses_date}</td>
                   <td>{expense.payment_by}</td>
                 </tr>
               ))
