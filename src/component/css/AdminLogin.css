@@ -1,0 +1,289 @@
+
+/* Overlay for the login/sign-up page */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    backdrop-filter: blur(5px); /* Apply blur effect to background */
+    z-index: 1000;
+    overflow-y: auto; /* Allow scrolling on overlay */
+  }
+  
+  /* Main container for login/signup */
+  .logSign-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    width: 90%;
+    max-width: 700px;
+    max-height: 90%; /* Ensure form doesn't overflow viewport */
+    background-color: #f4f4f9; /* Light background */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    text-align: center;
+    overflow: auto; /* Enable scrolling if content overflows */
+    flex-wrap: wrap; /* Allow elements to wrap on smaller screens */
+  }
+  
+  /* Image container */
+  .logSign-img-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0px;
+  }
+  
+  .logSign-img-container img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Form container */
+  .logSign-form-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px;
+    max-height: 100%; /* Ensure form container is fully visible */
+    overflow: auto; /* Allow form to scroll within container */
+  }
+  
+  /* Form heading */
+  .logSign-form-container h2 {
+    margin-bottom: 20px;
+    color: #333; /* Dark color for heading */
+  }
+  .Signinh2 {
+    margin-bottom: 10px;
+    margin-top: 300px;
+    color: #333; /* Dark color for heading */
+  }
+  
+  /* Form fields */
+  label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: block;
+    color: #555; /* Darker color for labels */
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #4d97e1; /* Border color */
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: "Stylish", serif; /* Font styling */
+    transition: border-color 0.3s ease;
+  }
+  
+  /* Input focus effect */
+  input:focus, select:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  /* Login button */
+  .login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745; /* Green background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    margin-left: 0px;
+  }
+  
+  /* Button hover effect */
+  .login-button:hover {
+    background-color: #218838;
+  }
+  
+  /* Error text styling */
+  .error-text {
+    color: red;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+  }
+  
+  /* Additional links section */
+  .additional-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    font-size: 14px;
+  }
+  
+  a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  /* Link hover effect */
+  .additional-links a:hover {
+    color: #0056b3;
+  }
+  
+  /* Password input container */
+  .password-input {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+  }
+  .info-text {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 5px;
+  }
+  /* Password input field */
+  .password-input input {
+    width: 100%;
+    padding: 10px;
+    padding-right: 60px; /* Space for 'Show' button */
+    border: 2px solid #4d97e1;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  
+  /* Focus effect for password input */
+  .password-input input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  /* Show/Hide button inside password input */
+  .password-input button {
+    position: absolute;
+    right: -10px;
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    color: #007bff;
+    transition: color 0.3s ease;
+  }
+  
+  /* Hover effect for Show/Hide button */
+  .password-input button:hover {
+    color: #0056b3;
+  }
+  
+  /* PDF viewer styles */
+  .pdf-viewer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .pdf-viewer iframe {
+    width: 90%;  /* Full width for larger screens */
+    height: 600px; /* Default height */
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .pdf-viewer iframe:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 1);
+  }
+  
+  /* Close button */
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    color: #ff4d4d; /* Red color for close button */
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Hover effect for close button */
+  .close-button:hover {
+    color: #ff1a1a; /* Darker red on hover */
+    transform: scale(1.1); /* Slight scaling on hover */
+  }
+  
+  /* PDF close button */
+  .pdfclosebtn {
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 15px;
+  }
+  
+  .pdfclosebtn:hover {
+    background-color: #ff3333;
+    box-shadow: 0 4px 10px rgba(255, 77, 77, 0.5);
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+    /* Adjust logSign container for smaller screens */
+    .logSign-container {
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      max-height: 100%;
+      padding: 10px; /* Reduced padding for mobile */
+      margin: 0; /* No margin */
+    }
+    .Signinh2 {
+      margin-bottom: 10px;
+      margin-top: 0px;
+    }
+  
+    /* Image and form containers in stack layout */
+   .logSign-form-container {
+      width: 100%;
+      display:block;
+    }
+    .logSign-img-container{
+    max-width: 100%;
+    max-height: 40%;
+    margin-bottom: 0px;
+    }
+    .logSign-img-container img {
+      width: 100%; /* Limit image size on mobile */
+      height: 100%;
+    }
+  
+    .logSign-form-container {
+      padding: 15px;
+      overflow: scroll; /* Allow scrolling for smaller screens */
+    }
+  
+    input, select, .login-button {
+      font-size: 14px; /* Smaller font size for mobile */
+    }
+  }
+  
