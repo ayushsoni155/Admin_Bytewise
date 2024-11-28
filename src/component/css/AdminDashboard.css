@@ -60,10 +60,10 @@ button {
   margin-left: 10px;
 }
 
-button:hover {
+/* button:hover {
   background-color: #3c7bc4;
   box-shadow: 0 4px 8px rgba(60, 123, 196, 0.3);
-}
+} */
 
 button:active {
   background-color: #2e6aa6;
