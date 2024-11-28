@@ -78,7 +78,7 @@
     color: #555; /* Darker color for labels */
   }
   
-  #Logoininput {
+ .password-input input{
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -90,7 +90,7 @@
   }
   
   /* Input focus effect */
-  #Logoininput:focus, {
+ .password-input input:focus, {
     border-color: #007bff;
     outline: none;
   }
@@ -224,7 +224,7 @@
       overflow: scroll; /* Allow scrolling for smaller screens */
     }
   
-    #Logoininput,.login-button {
+   .password-input input,.login-button {
       font-size: 14px; /* Smaller font size for mobile */
     }
   }
