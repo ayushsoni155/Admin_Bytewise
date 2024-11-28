@@ -1,6 +1,6 @@
 
 /* Overlay for the login/sign-up page */
-.overlay {
+#overlayLogin{
     position: fixed;
     top: 0;
     left: 0;
