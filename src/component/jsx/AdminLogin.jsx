@@ -30,7 +30,7 @@ const AdminLogin = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div className="overlay">
+    <div id="overlayLogin">
       <div className="logSign-container">
         <div className="logSign-img-container">
           <img src="logo-transparent-png.png" alt="Admin Login" />
