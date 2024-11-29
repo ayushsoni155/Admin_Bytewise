@@ -30,6 +30,15 @@ const AdminFeedback = () => {
         fetchFeedbacks();
     }, []);
 
+    // Function to format date to dd/mm/yyyy
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-based
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    };
+
     return (
         <div className="admin-feedback-container">
             <h2>All Feedback</h2>
@@ -56,7 +65,7 @@ const AdminFeedback = () => {
                                 <td>{feedback.feedback_enrolmentID}</td>
                                 <td>{feedback.name}</td>
                                 <td>{feedback.feedback_text}</td>
-                                <td>{feedback.feedback_date.split('T')[0]}</td> {/* Show date part */}
+                                <td>{formatDate(feedback.feedback_date)}</td> {/* Format date here */}
                                 <td>{feedback.feedback_date.split('T')[1].split('.')[0]}</td> {/* Show time part */}
                             </tr>
                         ))}
