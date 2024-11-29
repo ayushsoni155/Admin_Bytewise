@@ -30,30 +30,6 @@ const AdminFeedback = () => {
         fetchFeedbacks();
     }, []);
 
-    // Function to format date as dd/mm/yyyy
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-
-        // Format date as dd/mm/yyyy
-        return date.toLocaleDateString('en-GB', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',  // Full year (yyyy)
-        });
-    };
-
-    // Function to format time as 12-hour format with AM/PM
-    const formatTime = (dateString) => {
-        const date = new Date(dateString);
-
-        // Format time as 12-hour format with AM/PM
-        return date.toLocaleTimeString('en-IN', {
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: true,
-        });
-    };
-
     return (
         <div className="admin-feedback-container">
             <h2>All Feedback</h2>
@@ -80,8 +56,8 @@ const AdminFeedback = () => {
                                 <td>{feedback.feedback_enrolmentID}</td>
                                 <td>{feedback.name}</td>
                                 <td>{feedback.feedback_text}</td>
-                                <td>{formatDate(feedback.feedback_date)}</td>
-                                <td>{formatTime(feedback.feedback_date)}</td>
+                                <td>{feedback.feedback_date.split('T')[0]}</td> {/* Show date part */}
+                                <td>{feedback.feedback_date.split('T')[1].split('.')[0]}</td> {/* Show time part */}
                             </tr>
                         ))}
                     </tbody>
