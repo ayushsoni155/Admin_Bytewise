@@ -81,16 +81,13 @@ const AdminOrder = () => {
     }
   };
 
-  const formatDate = (date) => {
-    const options = {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    };
-    return new Date(date).toLocaleString("en-GB", options);
+  // Function to format date to dd/mm/yyyy
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = String(date.getUTCDate()).padStart(2, "0"); // Ensure day is 2 digits
+    const month = String(date.getUTCMonth() + 1).padStart(2, "0"); // Month is zero-based
+    const year = date.getUTCFullYear(); // Get full year
+    return `${day}/${month}/${year}`; // Return formatted date
   };
 
   const filteredOrders =
@@ -100,7 +97,7 @@ const AdminOrder = () => {
 
   if (loading) return <p className="loading-text">Loading orders...</p>;
 
- return (
+  return (
     <div id="admin-order-body">
       <h2 className="admin-order-heading">Admin Orders</h2>
 
@@ -176,7 +173,7 @@ const AdminOrder = () => {
             {(filteredOrder ? [filteredOrder] : filteredOrders).map((order) => (
               <tr key={order.orderID}>
                 <td>{order.orderID}</td>
-                <td>{new Date(order.order_date).toLocaleString()}</td>
+                <td>{formatDate(order.order_date)}</td> {/* Use the formatDate function here */}
                 <td className={`order${order.completeStatus}`}>{order.completeStatus}</td>
                 <td>{order.name}</td>
                 <td>{order.enrolmentID}</td>
