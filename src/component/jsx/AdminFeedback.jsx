@@ -38,7 +38,15 @@ const AdminFeedback = () => {
     const year = date.getUTCFullYear();  // Use getUTCFullYear() for UTC year
     return `${day}/${month}/${year}`;
 };
-
+const formatTime = (timeString) => {
+    const [hour, minute] = timeString.split(':');  // Split the time part into hours and minutes
+    let hours = parseInt(hour, 10);  // Convert hours to an integer
+    const minutes = minute.split('.')[0];  // Remove milliseconds if any
+    const ampm = hours >= 12 ? 'PM' : 'AM';  // Determine AM or PM
+    hours = hours % 12;  // Convert to 12-hour format
+    hours = hours ? hours : 12;  // If hour is 0, set it to 12 (midnight)
+    return `${hours}:${minutes} ${ampm}`;
+};
 
     return (
         <div className="admin-feedback-container">
@@ -67,7 +75,7 @@ const AdminFeedback = () => {
                                 <td>{feedback.name}</td>
                                 <td>{feedback.feedback_text}</td>
                                 <td>{formatDate(feedback.feedback_date)}</td> {/* Format date here */}
-                                <td>{feedback.feedback_date.split('T')[1].split('.')[0]}</td> {/* Show time part */}
+                                <td>{formatTime(feedback.feedback_date.split('T')[1])}</td> {/* Show time part */}
                             </tr>
                         ))}
                     </tbody>
