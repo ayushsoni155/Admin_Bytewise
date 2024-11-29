@@ -85,6 +85,10 @@ const AdminOrder = () => {
 const formatDate = (dateString) => {
   const date = new Date(dateString);
 
+  // Add 5 hours and 30 minutes to adjust to IST
+  date.setHours(date.getHours() + 5);
+  date.setMinutes(date.getMinutes() + 30);
+
   // Format the date as dd/mm/yyyy
   const day = String(date.getUTCDate()).padStart(2, "0");
   const month = String(date.getUTCMonth() + 1).padStart(2, "0"); // Month is zero-based
@@ -101,6 +105,7 @@ const formatDate = (dateString) => {
 
   return `${day}/${month}/${year} ${hours}:${minutes} ${period}`; // Return formatted date and time
 };
+
 
   const filteredOrders =
     statusFilter === "All"
