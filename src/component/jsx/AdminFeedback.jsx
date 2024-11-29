@@ -76,7 +76,7 @@ const AdminFeedback = () => {
                                 <td>{feedback.feedback_enrolmentID}</td>
                                 <td>{feedback.name}</td>
                                 <td>{feedback.feedback_text}</td>
-                                <td>{formatDateAndTime(feedback.feedback_date)}</td>
+                                <td>{feedback.feedback_date}</td>
                             </tr>
                         ))}
                     </tbody>
