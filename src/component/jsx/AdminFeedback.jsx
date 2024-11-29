@@ -34,18 +34,15 @@ const AdminFeedback = () => {
     const formatDateAndTime = (dateString) => {
         const date = new Date(dateString);
 
-        // Convert to Indian Standard Time (UTC +5:30)
-        const indianTime = new Date(date.getTime() + (330 * 60000)); // 330 minutes = 5 hours 30 minutes
-
-        // Format date as dd/mm/yy
-        const formattedDate = indianTime.toLocaleDateString('en-GB', {
+        // Format date as dd/mm/yyyy
+        const formattedDate = date.toLocaleDateString('en-GB', {
             day: '2-digit',
             month: '2-digit',
-            year: '2-digit',
+            year: 'numeric',  // Full year (yyyy)
         });
 
-        // Format time as 12-hour format with AM/PM (Indian Standard Time)
-        const formattedTime = indianTime.toLocaleTimeString('en-IN', {
+        // Format time as 12-hour format with AM/PM
+        const formattedTime = date.toLocaleTimeString('en-IN', {
             hour: '2-digit',
             minute: '2-digit',
             hour12: true,
