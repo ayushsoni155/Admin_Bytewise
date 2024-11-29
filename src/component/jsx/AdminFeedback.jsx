@@ -30,6 +30,27 @@ const AdminFeedback = () => {
         fetchFeedbacks();
     }, []);
 
+    // Function to format date and time
+    const formatDateAndTime = (dateString) => {
+        const date = new Date(dateString);
+
+        // Format date as dd/mm/yy
+        const formattedDate = date.toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: '2-digit',
+            year: '2-digit',
+        });
+
+        // Format time as 12-hour format with AM/PM (Indian Standard Time)
+        const formattedTime = date.toLocaleTimeString('en-IN', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true,
+        });
+
+        return `${formattedDate} ${formattedTime}`;
+    };
+
     return (
         <div className="admin-feedback-container">
             <h2>All Feedback</h2>
@@ -46,7 +67,7 @@ const AdminFeedback = () => {
                             <th>ID</th>
                             <th>User Name</th>
                             <th>Feedback</th>
-                            <th>Date</th>
+                            <th>Date and Time</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,13 +76,7 @@ const AdminFeedback = () => {
                                 <td>{feedback.feedback_enrolmentID}</td>
                                 <td>{feedback.name}</td>
                                 <td>{feedback.feedback_text}</td>
-                                <td>
-                                    {new Date(feedback.feedback_date).toLocaleDateString('en-GB', {
-                                        day: '2-digit',
-                                        month: '2-digit',
-                                        year: 'numeric',
-                                    })}
-                                </td>
+                                <td>{formatDateAndTime(feedback.feedback_date)}</td>
                             </tr>
                         ))}
                     </tbody>
