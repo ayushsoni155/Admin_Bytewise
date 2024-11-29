@@ -82,13 +82,25 @@ const AdminOrder = () => {
   };
 
   // Function to format date to dd/mm/yyyy
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const day = String(date.getUTCDate()).padStart(2, "0"); // Ensure day is 2 digits
-    const month = String(date.getUTCMonth() + 1).padStart(2, "0"); // Month is zero-based
-    const year = date.getUTCFullYear(); // Get full year
-    return `${day}/${month}/${year}`; // Return formatted date
-  };
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+
+  // Format the date as dd/mm/yyyy
+  const day = String(date.getUTCDate()).padStart(2, "0");
+  const month = String(date.getUTCMonth() + 1).padStart(2, "0"); // Month is zero-based
+  const year = date.getUTCFullYear();
+
+  // Format the time as 12-hour format (AM/PM)
+  let hours = date.getUTCHours();
+  const minutes = String(date.getUTCMinutes()).padStart(2, "0");
+  const period = hours >= 12 ? "PM" : "AM";
+
+  // Convert hours to 12-hour format
+  hours = hours % 12;
+  hours = hours ? String(hours).padStart(2, "0") : "12"; // Handle 12:00 AM/PM case
+
+  return `${day}/${month}/${year} ${hours}:${minutes} ${period}`; // Return formatted date and time
+};
 
   const filteredOrders =
     statusFilter === "All"
