@@ -30,25 +30,28 @@ const AdminFeedback = () => {
         fetchFeedbacks();
     }, []);
 
-    // Function to format date and time
-    const formatDateAndTime = (dateString) => {
+    // Function to format date as dd/mm/yyyy
+    const formatDate = (dateString) => {
         const date = new Date(dateString);
 
         // Format date as dd/mm/yyyy
-        const formattedDate = date.toLocaleDateString('en-GB', {
+        return date.toLocaleDateString('en-GB', {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',  // Full year (yyyy)
         });
+    };
+
+    // Function to format time as 12-hour format with AM/PM
+    const formatTime = (dateString) => {
+        const date = new Date(dateString);
 
         // Format time as 12-hour format with AM/PM
-        const formattedTime = date.toLocaleTimeString('en-IN', {
+        return date.toLocaleTimeString('en-IN', {
             hour: '2-digit',
             minute: '2-digit',
             hour12: true,
         });
-
-        return `${formattedDate} ${formattedTime}`;
     };
 
     return (
@@ -67,7 +70,8 @@ const AdminFeedback = () => {
                             <th>ID</th>
                             <th>User Name</th>
                             <th>Feedback</th>
-                            <th>Date and Time</th>
+                            <th>Date</th>
+                            <th>Time</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -76,7 +80,8 @@ const AdminFeedback = () => {
                                 <td>{feedback.feedback_enrolmentID}</td>
                                 <td>{feedback.name}</td>
                                 <td>{feedback.feedback_text}</td>
-                                <td>{feedback.feedback_date}</td>
+                                <td>{formatDate(feedback.feedback_date)}</td>
+                                <td>{formatTime(feedback.feedback_date)}</td>
                             </tr>
                         ))}
                     </tbody>
