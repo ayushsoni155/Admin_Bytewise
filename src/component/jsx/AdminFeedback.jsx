@@ -31,13 +31,14 @@ const AdminFeedback = () => {
     }, []);
 
     // Function to format date to dd/mm/yyyy
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-based
-        const year = date.getFullYear();
-        return `${day}/${month}/${year}`;
-    };
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = String(date.getUTCDate()).padStart(2, '0');  // Use getUTCDate() for UTC day
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0');  // Use getUTCMonth() for UTC month
+    const year = date.getUTCFullYear();  // Use getUTCFullYear() for UTC year
+    return `${day}/${month}/${year}`;
+};
+
 
     return (
         <div className="admin-feedback-container">
