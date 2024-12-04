@@ -73,7 +73,7 @@ const App = () => {
   const [loginStatus, setLoginStatus] = useState(false);
 
   // Define your secret key
-  const secretKey = "@@@@1234bytewise24"; // Replace with a secure key
+  const secretKey = "@@@@1234@bytewise24"; // Replace with a secure key
 
   // Decrypt cookie and check login status on initial load
   useEffect(() => {
