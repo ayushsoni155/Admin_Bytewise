@@ -9,7 +9,8 @@ const AdminLogin = ({ onLoginSuccess }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [notification, setNotification] = useState(null);
 
-  const correctPassword = process.env.LOGIN_PASSWORD; // Replace with the actual password
+  const correctPassword = process.env.REACT_APP_LOGIN_PASSWORD;
+
  
 const secretKey = '@@@@1234@bytewise24';
 
