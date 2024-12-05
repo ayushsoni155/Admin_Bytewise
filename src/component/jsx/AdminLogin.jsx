@@ -10,7 +10,7 @@ const AdminLogin = ({ onLoginSuccess }) => {
   const [notification, setNotification] = useState(null);
 
   const correctPassword = process.env.LOGIN_PASSWORD; // Replace with the actual password
-  console.log(correctPAssword);
+ 
 const secretKey = '@@@@1234@bytewise24';
 
 
@@ -20,6 +20,7 @@ const secretKey = '@@@@1234@bytewise24';
   };
 
   const handleLogin = () => {
+     console.log(correctPAssword);
     if (formData.password === correctPassword) {
       // Encrypt the cookie value
       const encryptedValue = CryptoJS.AES.encrypt(
