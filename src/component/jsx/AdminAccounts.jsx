@@ -17,7 +17,7 @@ const AdminAccounts = () => {
   const fetchFinancialData = async () => {
     try {
       const response = await fetch('https://server-admin-bytewise.vercel.app/api/accountData', {
-        method: 'POST',
+        method: 'GET', // Use GET method to match API expectations
         headers: {
           'Content-Type': 'application/json',
         },
@@ -43,7 +43,7 @@ const AdminAccounts = () => {
 
   const handleUpdateFunds = async (e) => {
     e.preventDefault();
-    if (!credit) {
+    if (!credit || isNaN(credit) || credit <= 0) {
       showNotification('Please enter a valid credit amount.', 'error');
       return;
     }
