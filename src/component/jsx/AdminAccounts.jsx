@@ -50,14 +50,13 @@ const AdminAccounts = () => {
     }
 
     try {
-      const updateData = { credit: parseFloat(credit) };
 
-      const response = await fetch('/api/accounts/overview', {
+      const response = await fetch('https://server-admin-bytewise.vercel.app/api/fundcredit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(updateData),
+        body: JSON.stringify(credit),
       });
 
       const data = await response.json();
