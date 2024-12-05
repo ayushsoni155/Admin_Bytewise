@@ -18,11 +18,11 @@ const AdminAccounts = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          filterType,
-          year: selectedYear,
-          month: selectedMonth,
-        }),
+        // body: JSON.stringify({
+        //   filterType,
+        //   year: selectedYear,
+        //   month: selectedMonth,
+        // }),
       });
 
       const data = await response.json();
