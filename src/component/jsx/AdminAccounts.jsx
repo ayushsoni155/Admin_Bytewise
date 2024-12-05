@@ -13,7 +13,7 @@ const AdminAccounts = () => {
 
   const fetchFinancialData = async () => {
     try {
-      const response = await fetch('http://localhost:3000/accountsData', {
+      const response = await fetch('https://server-admin-bytewise.vercel.app/api/accountData', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
