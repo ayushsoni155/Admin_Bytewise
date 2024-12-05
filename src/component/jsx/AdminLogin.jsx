@@ -21,7 +21,6 @@ const secretKey = '@@@@1234@bytewise24';
   };
 
   const handleLogin = () => {
-     console.log(correctPassword);
     if (formData.password === correctPassword) {
       // Encrypt the cookie value
       const encryptedValue = CryptoJS.AES.encrypt(
