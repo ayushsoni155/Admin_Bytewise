@@ -42,39 +42,36 @@ const AdminAccounts = () => {
     fetchFinancialData();
   }, [filterType, selectedYear, selectedMonth]);
 
-  const handleUpdateFunds = async (e) => {
-    e.preventDefault();
-    if (!credit) {
-      setUpdateMessage('Please enter a valid credit amount.');
-      return;
+ const handleUpdateFunds = async (e) => {
+  e.preventDefault();
+  if (!credit) {
+    setUpdateMessage('Please enter a valid credit amount.');
+    return;
+  }
+
+  try {
+    const response = await fetch('https://server-admin-bytewise.vercel.app/api/fundcredit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ amount: credit }), // Send as an object with `amount`
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      setUpdateMessage('Funds updated successfully.');
+      setCredit('');
+      fetchFinancialData(); // Fetch updated funds
+    } else {
+      setUpdateMessage(`Error: ${data.error}`);
     }
+  } catch (error) {
+    console.error('Error updating funds:', error);
+    setUpdateMessage('Failed to update funds. Please try again later.');
+  }
+};
 
-    try {
-
-      const response = await fetch('https://server-admin-bytewise.vercel.app/api/fundcredit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(credit),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        setUpdateMessage('Funds updated successfully.');
-
-        // Update available funds in real-time
-        const { totalCredit, totalDebit } = data;
-        setAvailableFunds(totalCredit - totalDebit);
-        setCredit('');
-      } else {
-        setUpdateMessage(`Error: ${data.error}`);
-      }
-    } catch (error) {
-      console.error('Error updating funds:', error);
-      setUpdateMessage('Failed to update funds. Please try again later.');
-    }
-  };
 
   return (
     <div className="admin-container">
