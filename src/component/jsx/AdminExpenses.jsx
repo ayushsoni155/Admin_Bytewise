@@ -535,11 +535,10 @@ const AdminExpenses = () => {
           )}
         </tbody>
       </table>
-
-      <div className="admin-expenses-summary">
-        <p>Total Expenses: ₹{totalExpenses}</p>
-        <p>Available Funds: ₹{availableFunds}</p>
-      </div>
+ <div className="total-expenses">
+   <h3>Total Expenses: ₹{totalExpenses.toFixed(2)}</h3>
+   <h3>Available Funds: ₹{availableFunds.toFixed(2)}</h3>
+ </div>
     </div>
   );
 };
