@@ -10,6 +10,7 @@ const AdminLogin = ({ onLoginSuccess }) => {
   const [notification, setNotification] = useState(null);
 
   const correctPassword = process.env.LOGIN_PASSWORD; // Replace with the actual password
+  console.log(correctPAssword);
 const secretKey = '@@@@1234@bytewise24';
 
 
