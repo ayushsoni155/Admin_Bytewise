@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import '../css/AdminAccounts.css'; // Import the external CSS
+import Notification from './Notification'; // Import the Notification component
 
 const AdminAccounts = () => {
   const [availableFunds, setAvailableFunds] = useState(0);
   const [grossProfit, setGrossProfit] = useState(0);
   const [netProfit, setNetProfit] = useState(0);
   const [credit, setCredit] = useState('');
-  const [updateMessage, setUpdateMessage] = useState('');
-  const [filterType, setFilterType] = useState('all');
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
+  const [notification, setNotification] = useState({ message: '', type: '', visible: false });
+
+  const showNotification = (message, type) => {
+    setNotification({ message, type, visible: true });
+    setTimeout(() => setNotification({ message: '', type: '', visible: false }), 3000);
+  };
 
   const fetchFinancialData = async () => {
     try {
@@ -18,11 +21,6 @@ const AdminAccounts = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        // body: JSON.stringify({
-        //   filterType,
-        //   year: selectedYear,
-        //   month: selectedMonth,
-        // }),
       });
 
       const data = await response.json();
@@ -31,100 +29,54 @@ const AdminAccounts = () => {
         setGrossProfit(data.grossProfit || 0);
         setNetProfit(data.netProfit || 0);
       } else {
-        console.error('Error fetching financial data:', data.error);
+        showNotification(`Error fetching data: ${data.error}`, 'error');
       }
     } catch (error) {
       console.error('Error fetching financial data:', error);
+      showNotification('Failed to fetch financial data. Please try again.', 'error');
     }
   };
 
   useEffect(() => {
     fetchFinancialData();
-  }, [filterType, selectedYear, selectedMonth]);
+  }, []);
 
- const handleUpdateFunds = async (e) => {
-  e.preventDefault();
-  if (!credit) {
-    setUpdateMessage('Please enter a valid credit amount.');
-    return;
-  }
-
-  try {
-    const response = await fetch('https://server-admin-bytewise.vercel.app/api/fundcredit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ amount: credit }), // Send as an object with `amount`
-    });
-
-    const data = await response.json();
-    if (response.ok) {
-      setUpdateMessage('Funds updated successfully.');
-      setCredit('');
-      fetchFinancialData(); // Fetch updated funds
-    } else {
-      setUpdateMessage(`Error: ${data.error}`);
+  const handleUpdateFunds = async (e) => {
+    e.preventDefault();
+    if (!credit) {
+      showNotification('Please enter a valid credit amount.', 'error');
+      return;
     }
-  } catch (error) {
-    console.error('Error updating funds:', error);
-    setUpdateMessage('Failed to update funds. Please try again later.');
-  }
-};
 
+    try {
+      const response = await fetch('https://server-admin-bytewise.vercel.app/api/fundcredit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ amount: credit }),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        showNotification('Funds updated successfully.', 'success');
+        setCredit('');
+        fetchFinancialData(); // Fetch updated funds
+      } else {
+        showNotification(`Error: ${data.error}`, 'error');
+      }
+    } catch (error) {
+      console.error('Error updating funds:', error);
+      showNotification('Failed to update funds. Please try again later.', 'error');
+    }
+  };
 
   return (
     <div className="admin-container">
+      {notification.visible && (
+        <Notification message={notification.message} type={notification.type} />
+      )}
       <h2 className="admin-header">Financial Overview</h2>
-
-      <div className="filters">
-        <label htmlFor="filter">Filter by:</label>
-        <select
-          id="filter"
-          value={filterType}
-          onChange={(e) => setFilterType(e.target.value)}
-        >
-          <option value="all">All</option>
-          <option value="daily">Daily</option>
-          <option value="weekly">Weekly</option>
-          <option value="monthly">Monthly</option>
-          <option value="yearly">Yearly</option>
-        </select>
-
-        {filterType === 'monthly' || filterType === 'yearly' ? (
-          <>
-            <label htmlFor="year">Year:</label>
-            <select
-              id="year"
-              value={selectedYear}
-              onChange={(e) => setSelectedYear(e.target.value)}
-            >
-              {[...Array(5).keys()].map((i) => (
-                <option key={i} value={new Date().getFullYear() - i}>
-                  {new Date().getFullYear() - i}
-                </option>
-              ))}
-            </select>
-          </>
-        ) : null}
-
-        {filterType === 'monthly' ? (
-          <>
-            <label htmlFor="month">Month:</label>
-            <select
-              id="month"
-              value={selectedMonth}
-              onChange={(e) => setSelectedMonth(e.target.value)}
-            >
-              {Array.from({ length: 12 }, (_, i) => (
-                <option key={i} value={i}>
-                  {new Date(0, i).toLocaleString('en-US', { month: 'long' })}
-                </option>
-              ))}
-            </select>
-          </>
-        ) : null}
-      </div>
 
       <div className="admin-card">
         <h3>Available Funds</h3>
@@ -161,7 +113,6 @@ const AdminAccounts = () => {
           </div>
           <button type="submit" className="btn-update">Update Funds</button>
         </form>
-        {updateMessage && <p className="update-message">{updateMessage}</p>}
       </div>
     </div>
   );
