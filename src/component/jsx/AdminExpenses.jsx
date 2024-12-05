@@ -508,8 +508,8 @@ const AdminExpenses = () => {
       </div>
 
        <div className="total-expenses">
+          <h3>Available Funds: ₹{availableFunds.toFixed(2)}</h3>
    <h3>Total Expenses: ₹{totalExpenses.toFixed(2)}</h3>
-   <h3>Available Funds: ₹{availableFunds.toFixed(2)}</h3>
  </div>
 
       <table className="admin-expenses-table">
