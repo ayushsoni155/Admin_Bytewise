@@ -5,6 +5,7 @@ import Notification from './Notification'; // Import the Notification component
 const AdminAccounts = () => {
   const [availableFunds, setAvailableFunds] = useState(0);
   const [grossProfit, setGrossProfit] = useState(0);
+   const [CashInHand, setCashInHand] = useState(0);
   const [netProfit, setNetProfit] = useState(0);
   const [notification, setNotification] = useState({ message: '', type: '', visible: false });
 
@@ -25,6 +26,7 @@ const AdminAccounts = () => {
       const data = await response.json();
       if (response.ok) {
         setAvailableFunds(data.availableFunds || 0);
+        setCashInHand(data.CashInHand || 0);
         setGrossProfit(data.grossProfit || 0);
         setNetProfit(data.netProfit || 0);
       } else {
@@ -51,6 +53,12 @@ const AdminAccounts = () => {
         <h3>Available Funds</h3>
         <p className="admin-amount">
           {availableFunds.toLocaleString('en-US', { style: 'currency', currency: 'INR' })}
+        </p>
+      </div>
+       <div className="admin-card">
+        <h3>In Hand Cash</h3>
+        <p className="admin-amount">
+          {CashInHand.toLocaleString('en-US', { style: 'currency', currency: 'INR' })}
         </p>
       </div>
 
