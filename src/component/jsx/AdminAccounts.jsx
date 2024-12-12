@@ -6,7 +6,6 @@ const AdminAccounts = () => {
   const [availableFunds, setAvailableFunds] = useState(0);
   const [grossProfit, setGrossProfit] = useState(0);
   const [netProfit, setNetProfit] = useState(0);
-  const [credit, setCredit] = useState('');
   const [notification, setNotification] = useState({ message: '', type: '', visible: false });
 
   const showNotification = (message, type) => {
@@ -17,7 +16,7 @@ const AdminAccounts = () => {
   const fetchFinancialData = async () => {
     try {
       const response = await fetch('https://server-admin-bytewise.vercel.app/api/accountsData', {
-        method: 'POST', // Use GET method to match API expectations
+        method: 'GET', // Corrected to GET as per API convention
         headers: {
           'Content-Type': 'application/json',
         },
@@ -40,36 +39,6 @@ const AdminAccounts = () => {
   useEffect(() => {
     fetchFinancialData();
   }, []);
-
-  const handleUpdateFunds = async (e) => {
-    e.preventDefault();
-    if (!credit || isNaN(credit) || credit <= 0) {
-      showNotification('Please enter a valid credit amount.', 'error');
-      return;
-    }
-
-    try {
-      const response = await fetch('https://server-admin-bytewise.vercel.app/api/fundcredit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ amount: credit }),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        showNotification('Funds updated successfully.', 'success');
-        setCredit('');
-        fetchFinancialData(); // Fetch updated funds
-      } else {
-        showNotification(`Error: ${data.error}`, 'error');
-      }
-    } catch (error) {
-      console.error('Error updating funds:', error);
-      showNotification('Failed to update funds. Please try again later.', 'error');
-    }
-  };
 
   return (
     <div className="admin-container">
@@ -97,22 +66,6 @@ const AdminAccounts = () => {
         <p className="admin-amount">
           {netProfit.toLocaleString('en-US', { style: 'currency', currency: 'INR' })}
         </p>
-      </div>
-
-      <div className="admin-card">
-        <h3>Update Funds</h3>
-        <form className="admin-form" onSubmit={handleUpdateFunds}>
-          <div className="form-group">
-            <label>Credit Amount (INR):</label>
-            <input
-              type="number"
-              value={credit}
-              onChange={(e) => setCredit(e.target.value)}
-              placeholder="Enter credit amount"
-            />
-          </div>
-          <button type="submit" className="btn-update">Update Funds</button>
-        </form>
       </div>
     </div>
   );
