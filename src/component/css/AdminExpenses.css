@@ -1,33 +1,34 @@
+
 /* General Layout */
 #admin-expenses-body {
-    margin: 80px auto;
-    padding: 25px;
+    margin: 100px auto;
+    padding: 20px;
     font-family: 'Poppins', sans-serif;
-    background-color: #f9fbfd;
+    background-color: #f8f9fa;
     border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     max-width: 1200px;
 }
 
 /* Heading */
 .admin-expenses-heading {
     text-align: center;
-    margin-bottom: 25px;
-    font-size: 2.4rem;
-    color: #33475b;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #343a40;
     font-weight: bold;
-    text-transform: capitalize;
-    letter-spacing: 1.5px;
 }
 
 /* Form Section */
 .admin-expenses-form {
     display: grid;
-    gap: 18px;
+    gap: 20px;
     background-color: #ffffff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 20px 0;
     max-width: 600px;
     margin: 0 auto;
@@ -44,39 +45,40 @@
 .admin-expenses-form select {
     width: 100%;
     padding: 10px;
-    border: 1px solid #d9dfe5;
-    border-radius: 6px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
     font-size: 1rem;
-    background-color: #fdfdfd;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
 }
 
 .admin-expenses-form input:focus,
 .admin-expenses-form select:focus {
-    border-color: #3399ff;
-    box-shadow: 0 0 5px rgba(51, 153, 255, 0.4);
+    border-color: #4d97e1;
+    box-shadow: 0 0 5px rgba(77, 151, 225, 0.5);
 }
 
 .admin-expenses-form .save-expense-btn {
-    background-color: #3399ff;
+    background-color: #007bff;
     color: #ffffff;
     padding: 12px;
     border: none;
     border-radius: 5px;
     font-size: 1rem;
-    font-weight: bold;
-    text-transform: uppercase;
     cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
     transition: background-color 0.3s ease;
 }
 
 .admin-expenses-form .save-expense-btn:hover {
-    background-color: #2872cc;
+    background-color: #0056b3;
 }
 
 /* Filters Section */
 .filters {
-    margin: 20px 0;
+    margin-top:10px;
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -94,47 +96,49 @@
     padding: 8px 12px;
     font-size: 1rem;
     border-radius: 5px;
-    border: 1px solid #d9dfe5;
+    border: 1px solid #dee2e6;
     background-color: #ffffff;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    transition: all 0.3s ease;
+    width: 200px;
+    max-width: 100%;
 }
 
 .filters select:focus {
-    border-color: #3399ff;
-    box-shadow: 0 0 5px rgba(51, 153, 255, 0.4);
+    border-color: #4d97e1;
+    box-shadow: 0 0 5px rgba(77, 151, 225, 0.5);
 }
 
 /* Table Styles */
-.admin-expenses-table {
+.admin-expenses-table{
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
     background-color: #ffffff;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.1);
 }
 
 .admin-expenses-table th,
 .admin-expenses-table td {
-    border: 1px solid #d9dfe5;
+    border: 1px solid #dee2e6;
     padding: 15px;
     text-align: left;
     font-size: 1rem;
 }
 
 .admin-expenses-table th {
-    background-color: #3399ff;
+    background-color: #4d97e1;
     color: #ffffff;
     text-transform: uppercase;
 }
 
 .admin-expenses-table tr:nth-child(even) {
-    background-color: #f8f9fa;
+    background-color: #f1f1f1;
 }
 
 .admin-expenses-table tr:hover {
-    background-color: #eaf4ff;
+    background-color: #e9ecef;
     transition: background-color 0.3s;
 }
 
@@ -142,32 +146,32 @@
 .total-expenses {
     margin-top: 20px;
     text-align: center;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: bold;
-    color: #495057;
 }
 
 /* No Expenses Text */
 .no-expenses-text {
     text-align: center;
     font-size: 1.2rem;
-    color: #868e96;
+    color: #495057;
     margin-top: 20px;
 }
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
-    #admin-expenses-body {
+    .admin-expenses-body {
         padding: 15px;
     }
 
-    .admin-expenses-heading {
-        font-size: 2rem;
+    .admin-expenses-heading{
+        font-size: 1.8rem;
     }
 
     .filters {
         flex-direction: column;
         gap: 15px;
+        margin-top:10px;
     }
 
     .admin-expenses-table th,
@@ -177,13 +181,13 @@
     }
 
     .total-expenses {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
     }
 }
 
 @media screen and (max-width: 480px) {
-    .admin-expenses-heading {
-        font-size: 1.8rem;
+    .admin-expenses-heading{
+        font-size: 1.6rem;
     }
 
     .admin-expenses-table {
@@ -194,6 +198,7 @@
     .admin-expenses-table th,
     .admin-expenses-table td {
         font-size: 0.8rem;
+        
     }
 
     .filters select {
