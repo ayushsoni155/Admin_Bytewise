@@ -180,10 +180,8 @@ const AdminExpenses = () => {
         </div>
         <button className="save-expense-btn" onClick={saveExpense}>
           Save Expense
-        </button>
-      </div>
-
-      <div className="admin-funds-form">
+        </button><br/>
+         <div className="admin-funds-form">
         <h3>Update Available Funds</h3>
         <form className="admin-form" onSubmit={handleUpdateFunds}>
           <div className="form-group">
@@ -199,6 +197,24 @@ const AdminExpenses = () => {
           <button type="submit" className="btn-update">Update Funds</button>
         </form>
       </div>
+      </div>
+
+{/*       <div className="admin-funds-form">
+        <h3>Update Available Funds</h3>
+        <form className="admin-form" onSubmit={handleUpdateFunds}>
+          <div className="form-group">
+            <label>Credit Amount (INR):</label>
+            <input
+              type="number"
+              value={credit}
+              onChange={(e) => setCredit(e.target.value)}
+              placeholder="Enter credit amount"
+              required
+            />
+          </div>
+          <button type="submit" className="btn-update">Update Funds</button>
+        </form>
+      </div> */}
 
       <div className="total-expenses">
         <h3>Available Funds: ₹{availableFunds.toFixed(2)}</h3>
