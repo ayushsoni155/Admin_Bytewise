@@ -56,7 +56,7 @@ const AdminAccounts = () => {
         </p>
       </div>
        <div className="admin-card">
-        <h3>In Hand Cash</h3>
+        <h3>Cash in Hand</h3>
         <p className="admin-amount">
           {CashInHand.toLocaleString('en-US', { style: 'currency', currency: 'INR' })}
         </p>
