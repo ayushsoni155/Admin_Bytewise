@@ -76,10 +76,6 @@ p {
 }
 
 @media (max-width: 768px) {
-    .user-details-container {
-        padding: 15px;
-        margin-top: 80px;
-    }
 
     h1 {
         font-size: 2rem;
@@ -101,13 +97,10 @@ p {
 }
 
 @media (max-width: 576px) {
-    .user-details-container {
-        padding: 10px;
-        margin-top: 60px;
-    }
+    
 
     h1 {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
     }
 
     .user-table {
