@@ -40,6 +40,8 @@ const AdminUser = () => {
               <th>Name</th>
               <th>Phone Number</th>
               <th>Semester</th>
+              <th>Recovery question ?</th>
+              <th>Recovery Answer</th>
             </tr>
           </thead>
           <tbody>
@@ -49,6 +51,8 @@ const AdminUser = () => {
                 <td>{user.name}</td>
                 <td>{user.phone}</td>
                 <td>{user.sem}</td>
+                <td>{user.recovery_question}</td>
+                <td>{user.recovery_answer}</td>
               </tr>
             ))}
           </tbody>
