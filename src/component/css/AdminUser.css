@@ -78,20 +78,55 @@ p {
 @media (max-width: 768px) {
     .user-details-container {
         padding: 15px;
-        margin-top: 100px;
+        margin-top: 80px;
     }
 
     h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
+        letter-spacing: 1px;
+    }
+
+    .user-table {
+        font-size: 0.9rem;
     }
 
     .user-table th,
     .user-table td {
         padding: 10px;
-        font-size: 0.9rem;
     }
 
     p {
         font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .user-details-container {
+        padding: 10px;
+        margin-top: 60px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .user-table {
+        width: 100%;
+        font-size: 0.8rem;
+    }
+
+    .user-table th,
+    .user-table td {
+        padding: 8px;
+        font-size: 0.8rem;
+    }
+
+    .user-table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    p {
+        font-size: 0.9rem;
     }
 }
