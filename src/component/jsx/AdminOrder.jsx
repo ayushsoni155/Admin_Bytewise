@@ -179,6 +179,8 @@ const formatDate = (dateString) => {
               <th>Order ID</th>
               <th>Order Date</th>
               <th>Status</th>
+              <th>Method</th>
+              <th>Payment Status</th>
               <th>User Name</th>
               <th>Enrolment ID</th>
               <th>Phone</th>
