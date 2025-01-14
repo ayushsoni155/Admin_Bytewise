@@ -192,6 +192,8 @@ const formatDate = (dateString) => {
                 <td>{order.orderID}</td>
                 <td>{formatDate(order.order_date)}</td> {/* Use the formatDate function here */}
                 <td className={`order${order.completeStatus}`}>{order.completeStatus}</td>
+                <td>{order.payment_Method}</td>
+                <td className={`payment${order.paymentStatus}`}>{order.paymentStatus}</td>
                 <td>{order.name}</td>
                 <td>{order.enrolmentID}</td>
                 <td>{order.phone}</td>
