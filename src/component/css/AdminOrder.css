@@ -20,6 +20,14 @@
     color: green;
     font-weight: bold;
 }
+.paymentNot_Done{
+     color: red;
+    font-weight: bold;
+}
+.paymentDone{
+      color: green;
+    font-weight: bold;
+}
 
 .orderCancelled {
     color: red;
