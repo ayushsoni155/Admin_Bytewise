@@ -122,6 +122,8 @@ const AdminProduct = () => {
           <option value="product_name">Name</option>
           <option value="costPrice">Cost Price</option>
           <option value="sellingPrice">Selling Price</option>
+          <option value="marketPrice">Market Price</option>
+          
           <option value="pages">Pages</option>
         </select>
         <input
@@ -146,6 +148,7 @@ const AdminProduct = () => {
             <th>Subject Code</th>
             <th>Name</th>
             <th>Pages</th>
+            <th>Market Price</th>
             <th>Cost Price</th>
             <th>Selling Price</th>
           </tr>
@@ -156,6 +159,7 @@ const AdminProduct = () => {
               <td>{product.subject_code}</td>
               <td>{product.product_name}</td>
               <td>{product.pages}</td>
+              <td>{product.marketPrice}</td>
               <td>{product.costPrice}</td>
               <td>{product.sellingPrice}</td>
             </tr>
