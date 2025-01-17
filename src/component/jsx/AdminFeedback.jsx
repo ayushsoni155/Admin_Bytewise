@@ -59,7 +59,7 @@ const formatTime = (timeString) => {
             ) : feedbacks.length === 0 ? (
                 <p>No feedback available.</p>
             ) : (
-          
+                <div className='feedbackTablecontainer'>
                 <table className="feedback-table">
                     <thead>
                         <tr>
@@ -82,6 +82,7 @@ const formatTime = (timeString) => {
                         ))}
                     </tbody>
                 </table>
+                    </div>
            
             )}
         </div>
