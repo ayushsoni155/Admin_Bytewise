@@ -14,7 +14,11 @@
     z-index: 1000;
     overflow-y: auto; /* Allow scrolling on overlay */
   }
-  
+  .error-text {
+  color: red;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
   /* Main container for login/signup */
   .logSign-container {
     display: flex;
