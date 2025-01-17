@@ -12,26 +12,26 @@ const AdminOrder = () => {
   const [statusFilter, setStatusFilter] = useState("All"); // State for filter dropdown
 
   // Fetch all orders
-  useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const response = await fetch("https://server-admin-bytewise.vercel.app/api/ordersData"); // Replace with your API endpoint
-        if (!response.ok) {
-          throw new Error("Failed to fetch orders");
-        }
-        const data = await response.json();
-
-        // Sort orders by date in descending order (latest first)
-        const sortedOrders = data.sort((a, b) => new Date(b.order_date) - new Date(a.order_date));
-        setOrders(sortedOrders);
-      } catch (error) {
-        console.error("Error fetching orders:", error);
-        setNotification({ message: "Failed to fetch orders.", type: "error" });
-      } finally {
-        setLoading(false);
+  const fetchOrders = async () => {
+    try {
+      const response = await fetch("https://server-admin-bytewise.vercel.app/api/ordersData"); // Replace with your API endpoint
+      if (!response.ok) {
+        throw new Error("Failed to fetch orders");
       }
-    };
+      const data = await response.json();
 
+      // Sort orders by date in descending order (latest first)
+      const sortedOrders = data.sort((a, b) => new Date(b.order_date) - new Date(a.order_date));
+      setOrders(sortedOrders);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+      setNotification({ message: "Failed to fetch orders.", type: "error" });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchOrders();
   }, []);
 
@@ -67,14 +67,13 @@ const AdminOrder = () => {
       }
 
       setNotification({ message: "Order status updated successfully!", type: "success" });
-      // Update the state to reflect the change
-      setOrders((prevOrders) =>
-        prevOrders.map((order) =>
-          order.orderID === filteredOrder.orderID ? { ...order, completeStatus: newStatus } : order
-        )
-      );
-      setFilteredOrder(null); // Reset filtered order
-      setSearchOrderID(""); // Reset search input
+
+      // Re-fetch all orders to refresh the table
+      await fetchOrders();
+
+      // Reset the filtered order and search input
+      setFilteredOrder(null);
+      setSearchOrderID("");
     } catch (error) {
       console.error("Error updating order status:", error);
       setNotification({ message: "Failed to update order status.", type: "error" });
@@ -82,30 +81,29 @@ const AdminOrder = () => {
   };
 
   // Function to format date to dd/mm/yyyy
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
 
-  // Add 5 hours and 30 minutes to adjust to IST
-  date.setHours(date.getHours() + 5);
-  date.setMinutes(date.getMinutes() + 30);
+    // Add 5 hours and 30 minutes to adjust to IST
+    date.setHours(date.getHours() + 5);
+    date.setMinutes(date.getMinutes() + 30);
 
-  // Format the date as dd/mm/yyyy
-  const day = String(date.getUTCDate()).padStart(2, "0");
-  const month = String(date.getUTCMonth() + 1).padStart(2, "0"); // Month is zero-based
-  const year = date.getUTCFullYear();
+    // Format the date as dd/mm/yyyy
+    const day = String(date.getUTCDate()).padStart(2, "0");
+    const month = String(date.getUTCMonth() + 1).padStart(2, "0"); // Month is zero-based
+    const year = date.getUTCFullYear();
 
-  // Format the time as 12-hour format (AM/PM)
-  let hours = date.getUTCHours();
-  const minutes = String(date.getUTCMinutes()).padStart(2, "0");
-  const period = hours >= 12 ? "PM" : "AM";
+    // Format the time as 12-hour format (AM/PM)
+    let hours = date.getUTCHours();
+    const minutes = String(date.getUTCMinutes()).padStart(2, "0");
+    const period = hours >= 12 ? "PM" : "AM";
 
-  // Convert hours to 12-hour format
-  hours = hours % 12;
-  hours = hours ? String(hours).padStart(2, "0") : "12"; // Handle 12:00 AM/PM case
+    // Convert hours to 12-hour format
+    hours = hours % 12;
+    hours = hours ? String(hours).padStart(2, "0") : "12"; // Handle 12:00 AM/PM case
 
-  return `${day}/${month}/${year} ${hours}:${minutes} ${period}`; // Return formatted date and time
-};
-
+    return `${day}/${month}/${year} ${hours}:${minutes} ${period}`;
+  };
 
   const filteredOrders =
     statusFilter === "All"
@@ -192,7 +190,7 @@ const formatDate = (dateString) => {
             {(filteredOrder ? [filteredOrder] : filteredOrders).map((order) => (
               <tr key={order.orderID}>
                 <td>{order.orderID}</td>
-                <td>{formatDate(order.order_date)}</td> {/* Use the formatDate function here */}
+                <td>{formatDate(order.order_date)}</td>
                 <td className={`order${order.completeStatus}`}>{order.completeStatus}</td>
                 <td>{order.payment_Method}</td>
                 <td className={`payment${order.paymentStatus}`}>{order.paymentStatus}</td>
