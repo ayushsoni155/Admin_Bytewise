@@ -71,13 +71,27 @@
   }
   
   /* Form fields */
-  label {
+/*   label {
     font-size: 16px;
     margin-bottom: 5px;
     display: block;
     color: #555; /* Darker color for labels */
-  }
-  
+  } */
+  label {
+  display: flex;
+  align-items: flex-start;
+  font-size: 16px;
+ 
+  color:#4d97e1;/* #555 /* Darker color for labels */
+  position: relative;
+  z-index: 1;
+  top: 14px;
+  left: 10px;
+  width: fit-content;
+  padding: 0px 2px 0px 2px;
+  background-color: white;
+  font-weight: bold;
+}
  .password-input input{
     width: 100%;
     padding: 10px;
