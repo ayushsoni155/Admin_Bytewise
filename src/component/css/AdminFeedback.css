@@ -16,6 +16,10 @@ h2 {
     font-weight: bold;
 }
 
+.table-wrapper {
+    overflow-x: auto; /* Makes the table scrollable horizontally on small screens */
+}
+
 .feedback-table {
     width: 100%;
     border-collapse: collapse;
@@ -78,7 +82,7 @@ p {
 @media (max-width: 768px) {
     .admin-feedback-container {
         padding: 15px;
-        margin-top: 100px;
+        margin-top: 50px;
     }
 
     h2 {
@@ -93,5 +97,25 @@ p {
 
     p {
         font-size: 1rem;
+    }
+    
+    /* Make table columns stack on smaller screens */
+    .feedback-table th,
+    .feedback-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .feedback-table td {
+        text-align: right;
+        padding-left: 50%; /* Push the content to the right */
+        position: relative;
+    }
+
+    .feedback-table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        font-weight: bold;
     }
 }
