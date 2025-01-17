@@ -22,6 +22,28 @@ const AdminUser = () => {
     }
   };
 
+  // Function to delete a user by enrollment ID
+ const deleteUser = async (enrolmentID) => {
+  try {
+    const response = await fetch(`https://server-admin-bytewise.vercel.app/api/userDelete/${enrolmentID}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      // Remove the deleted user from the users array
+      setUsers((prevUsers) => prevUsers.filter((user) => user.enrolmentID !== enrolmentID));
+    
+    } else {
+      console.error('Failed to delete user');
+      alert('Failed to delete user');
+    }
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    alert('Error deleting user');
+  }
+};
+
+
   // Fetch user details when the component mounts
   useEffect(() => {
     fetchUserDetails();
@@ -42,6 +64,7 @@ const AdminUser = () => {
               <th>Semester</th>
               <th>Recovery question ?</th>
               <th>Recovery Answer</th>
+              <th>Action</th> {/* Add Action column for delete button */}
             </tr>
           </thead>
           <tbody>
@@ -53,6 +76,11 @@ const AdminUser = () => {
                 <td>{user.sem}</td>
                 <td>{user.recovery_question}</td>
                 <td>{user.recovery_answer}</td>
+                <td>
+                  <button onClick={() => deleteUser(user.enrolmentID)} className="delete-btn">
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
