@@ -31,7 +31,7 @@ const AdminUser = () => {
     }
 
     try {
-      const response = await fetch(`https:///bytewise-server.vercel.app/api/userDelete/${searchEnrolmentID}`, {
+      const response = await fetch(`https://bytewise-server.vercel.app/api/userDelete/${searchEnrolmentID}`, {
         method: 'DELETE',
       });
 
