@@ -32,10 +32,12 @@ const deleteUser = async (searchEnrolmentID) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ searchEnrolmentID}), // Send enrolmentID in body
+      body: JSON.stringify({ searchEnrolmentID }), // Pass enrolmentID in body
     });
 
+    // Parse response
     const data = await response.json();
+
     if (response.ok) {
       console.log('User deleted successfully:', data);
       alert('User deleted successfully!');
@@ -48,6 +50,7 @@ const deleteUser = async (searchEnrolmentID) => {
     alert('Failed to delete user. Please try again.');
   }
 };
+
 
   // Fetch user details when the component mounts
   useEffect(() => {
