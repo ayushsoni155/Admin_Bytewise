@@ -63,13 +63,14 @@ const AdminUser = () => {
       
       {/* Search and Delete Section */}
       <div className="search-delete-container">
-        <input
-          type="text"
-          placeholder="Enter Enrollment Number"
-          value={searchEnrolmentID}
-          onChange={(e) => setSearchEnrolmentID(e.target.value)}
-          className="search-input"
-        />
+     <input
+  type="text"
+  placeholder="Enter Enrollment Number"
+  value={searchEnrolmentID}
+  onChange={(e) => setSearchEnrolmentID(e.target.value.trim().toUpperCase())}
+  className="search-input"
+/>
+
         <button onClick={deleteUser} className="delete-btn">
           Delete
         </button>
