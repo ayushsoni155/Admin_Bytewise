@@ -16,6 +16,34 @@ h1 {
     letter-spacing: 2px;
     font-weight: bold;
 }
+.search-delete-container {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-input {
+  padding: 10px;
+  font-size: 1rem;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.delete-btn {
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: white;
+  background-color: #dc3545; /* Red for delete */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #b02a37;
+}
 
 .user-table {
     width: 100%;
