@@ -1,3 +1,4 @@
+
 .user-details-container {
     margin-top: 100px;
     padding: 20px;
@@ -14,24 +15,6 @@ h1 {
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: bold;
-}
-.delete-btn {
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-}
-
-.delete-btn:hover {
-  background-color: #c0392b;
-}
-
-.delete-btn:focus {
-  outline: none;
 }
 
 .user-table {
