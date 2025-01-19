@@ -24,7 +24,7 @@ const AdminUser = () => {
   };
 
   // Function to delete a user by enrollment ID
-const deleteUser = async (enrolmentID) => {
+const deleteUser = async (searchEnrolmentID) => {
   try {
     const response = await fetch('https://server-admin-bytewise.vercel.app/api/userDelete', {
       method: 'DELETE',
@@ -32,7 +32,7 @@ const deleteUser = async (enrolmentID) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ enrolmentID }), // Send enrolmentID in body
+      body: JSON.stringify({ searchEnrolmentID}), // Send enrolmentID in body
     });
 
     const data = await response.json();
