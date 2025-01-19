@@ -32,7 +32,7 @@ const deleteUser = async (searchEnrolmentID) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(searchEnrolmentID), // Pass enrolmentID in body
+      body: JSON.stringify({ searchEnrolmentID }), // Pass enrolmentID in body
     });
 
     // Parse response
@@ -71,7 +71,7 @@ const deleteUser = async (searchEnrolmentID) => {
   className="search-input"
 />
 
-        <button onClick={deleteUser} className="delete-btn">
+        <button  onClick={() => deleteUser(searchEnrolmentID)} className="delete-btn">
           Delete
         </button>
       </div>
