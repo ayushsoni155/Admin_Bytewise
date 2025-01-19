@@ -32,7 +32,7 @@ const deleteUser = async (searchEnrolmentID) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ searchEnrolmentID }), // Pass enrolmentID in body
+      body: JSON.stringify(searchEnrolmentID), // Pass enrolmentID in body
     });
 
     // Parse response
