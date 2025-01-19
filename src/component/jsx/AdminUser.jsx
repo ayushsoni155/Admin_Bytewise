@@ -24,33 +24,29 @@ const AdminUser = () => {
   };
 
   // Function to delete a user by enrollment ID
-  const deleteUser = async () => {
-    if (!searchEnrolmentID.trim()) {
-      alert('Please enter an enrollment number');
-      return;
-    }
+  const deleteUser = async (enrolmentID) => {
+  try {
+    const response = await fetch(`https://server-admin-bytewise.vercel.app/api/userDelete?enrolmentID=${enrolmentID}`, {
+      method: 'DELETE',
+      credentials: 'include', // Required to send cookies or credentials
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-    try {
-      const response = await fetch(`https://bytewise-server.vercel.app/api/userDelete/${searchEnrolmentID}`, {
-        method: 'DELETE',
-      });
-
-      if (response.ok) {
-        // Remove the deleted user from the users array
-        setUsers((prevUsers) =>
-          prevUsers.filter((user) => user.enrolmentID !== searchEnrolmentID)
-        );
-        alert('User deleted successfully!');
-        setSearchEnrolmentID(''); // Clear the input field
-      } else {
-        console.error('Failed to delete user');
-        alert('Failed to delete user');
-      }
-    } catch (error) {
-      console.error('Error deleting user:', error);
-      alert('Error deleting user');
+    const data = await response.json();
+    if (response.ok) {
+      console.log('User deleted successfully:', data);
+      alert('User deleted successfully!');
+    } else {
+      console.error('Error deleting user:', data.error);
+      alert(`Error: ${data.error}`);
     }
-  };
+  } catch (error) {
+    console.error('Request failed:', error);
+    alert('Failed to delete user. Please try again.');
+  }
+};
 
   // Fetch user details when the component mounts
   useEffect(() => {
